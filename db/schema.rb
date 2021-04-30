@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_065739) do
+ActiveRecord::Schema.define(version: 2021_04_30_071547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(version: 2021_04_28_065739) do
   end
 
   create_table "predictions", force: :cascade do |t|
-    t.integer "team1_prediction"
-    t.integer "team2_prediction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "series_id"
+    t.boolean "winner"
+    t.integer "games"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -40,11 +42,11 @@ ActiveRecord::Schema.define(version: 2021_04_28_065739) do
   create_table "series", force: :cascade do |t|
     t.bigint "team1_id"
     t.bigint "team2_id"
-    t.integer "team1_score"
-    t.integer "team2_score"
     t.bigint "round_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "winner"
+    t.integer "games"
     t.index ["round_id"], name: "index_series_on_round_id"
     t.index ["team1_id"], name: "index_series_on_team1_id"
     t.index ["team2_id"], name: "index_series_on_team2_id"
@@ -66,4 +68,6 @@ ActiveRecord::Schema.define(version: 2021_04_28_065739) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "predictions", "series", name: "fk_series"
+  add_foreign_key "predictions", "users", name: "fk_user"
 end
