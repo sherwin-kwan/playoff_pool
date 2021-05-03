@@ -1,6 +1,7 @@
 class Prediction < ApplicationRecord
   belongs_to :user
   belongs_to :series
+  belongs_to :winner, class_name: "Team"
 
   def correct_winner?
     self.winner == self.series.winner

@@ -1,0 +1,29 @@
+pred_joey_1:
+  series: series1
+  winner: lightning
+  games: 4
+  user: joey
+
+pred_joey_2:
+  series: series2
+  winner: bruins
+  games: 7
+  user: joey
+
+pred_billy_2:
+  series: series2
+  winner: bruins
+  games: 5
+  user: billy
+
+pred_sher_14:
+  series: series14
+  winner: blues
+  games: 6
+  user: sherwin
+
+pred_joey_13:
+  series: series13
+  winner: bruins
+  games: 7
+  user: joey

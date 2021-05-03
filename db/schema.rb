@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_071547) do
+ActiveRecord::Schema.define(version: 2021_04_28_065739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,15 @@ ActiveRecord::Schema.define(version: 2021_04_30_071547) do
   end
 
   create_table "predictions", force: :cascade do |t|
+    t.bigint "winner_id"
+    t.integer "games"
+    t.bigint "user_id"
+    t.bigint "series_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
-    t.integer "series_id"
-    t.boolean "winner"
-    t.integer "games"
+    t.index ["series_id"], name: "index_predictions_on_series_id"
+    t.index ["user_id"], name: "index_predictions_on_user_id"
+    t.index ["winner_id"], name: "index_predictions_on_winner_id"
   end
 
   create_table "rounds", force: :cascade do |t|
@@ -42,14 +45,15 @@ ActiveRecord::Schema.define(version: 2021_04_30_071547) do
   create_table "series", force: :cascade do |t|
     t.bigint "team1_id"
     t.bigint "team2_id"
+    t.bigint "winner_id"
+    t.integer "games"
     t.bigint "round_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "winner"
-    t.integer "games"
     t.index ["round_id"], name: "index_series_on_round_id"
     t.index ["team1_id"], name: "index_series_on_team1_id"
     t.index ["team2_id"], name: "index_series_on_team2_id"
+    t.index ["winner_id"], name: "index_series_on_winner_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -68,6 +72,4 @@ ActiveRecord::Schema.define(version: 2021_04_30_071547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "predictions", "series", name: "fk_series"
-  add_foreign_key "predictions", "users", name: "fk_user"
 end

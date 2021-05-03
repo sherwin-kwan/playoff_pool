@@ -1,0 +1,15 @@
+round_one:
+  id: 1
+  base_score: 1
+
+round_two:
+  id: 2
+  base_score: 1
+
+round_three:
+  id: 3
+  base_score: 2
+
+round_four:
+  id: 4
+  base_score: 2

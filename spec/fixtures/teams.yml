@@ -1,0 +1,49 @@
+bruins:
+  short_name: "Bruins"
+  name: "Boston Bruins"
+
+hurricanes:
+  short_name: "Hurricanes"
+
+jackets:
+  short_name: "Jackets"
+
+islanders:
+  short_name: "Islanders"
+
+blues:
+  short_name: "Blues"
+
+sharks:
+  short_name: "Sharks"
+
+avalanche:
+  short_name: "Avalanche"
+
+stars:
+  short_name: "Stars"
+
+lightning:
+  short_name: "Lightning"
+  name: "Tampa Bay Lightning"
+
+leafs:
+  short_name: "Leafs"
+
+capitals:
+  short_name: "Capitals"
+
+penguins:
+  short_name: "Penguins"
+
+flames:
+  short_name: "Flames"
+
+knights:
+  short_name: "Knights"
+
+predators:
+  short_name: "Predators"
+
+jets:
+  short_name: "Jets"
