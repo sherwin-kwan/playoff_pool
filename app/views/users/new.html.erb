@@ -1,0 +1,41 @@
+<main>
+  <!-- Placeholder div to make space for the navbar (which is a position: absolute) -->
+  <div class="placeholder"></div>
+
+  <h1>Register New User Account</h1>
+  <div class="well">
+    <%= link_to "Already have an account? Sign In", login_path, class: "btn btn-info" %>
+  </div>
+
+  <%= form_for @user, url: users_path do |form| %>
+
+    <div class="form-group">
+      <%= form.label :name, "Full Name" %>
+      <%= form.text_field :name, class: "form-control", value: flash[:original_name] %>
+    </div>
+    <div class="form-group">
+      <%= form.label :given_name, "Preferred Name or Nickname (What should we call you?)" %>
+      <%= form.text_field :given_name, class: "form-control", value: flash[:original_given_name] %>
+    </div>
+    <div class="form-group">
+      <%= form.label :email, "Email" %>
+      <%= form.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :pw, "Password" %>
+      <%= form.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :password_confirmation, "Confirm Password" %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <% if flash[:errors] %>
+      <ul class="error">
+        <% flash[:errors].each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= form.submit "Register", class: "btn btn-primary" %>
+  <% end %>
+</main>

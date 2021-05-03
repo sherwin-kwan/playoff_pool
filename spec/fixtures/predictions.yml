@@ -10,6 +10,72 @@ pred_joey_2:
   games: 7
   user: joey
 
+pred_joey_3:
+  series: series3
+  winner: capitals
+  games: 5
+  user: joey
+
+pred_joey_4:
+  series: series4
+  winner: penguins
+  games: 7
+  user: joey
+
+pred_joey_5:
+  series: series5
+  winner: flames
+  games: 4
+  user: joey
+
+pred_joey_6:
+  series: series6
+  winner: sharks
+  games: 7
+  user: joey
+
+pred_joey_7:
+  series: series7
+  winner: predators
+  games: 7
+  user: joey
+
+pred_joey_8:
+  series: series8
+  winner: jets
+  games: 7
+  user: joey
+
+pred_joey_9_original:
+  series: series9
+  winner: bruins
+  games: 6
+  user: joey
+
+pred_joey_9:
+  series: series9
+  winner: bruins
+  games: 4
+  user: joey
+
+pred_joey_10:
+  series: series10
+  winner: islanders
+  games: 7
+  user: joey
+
+pred_user_11:
+  series: series11
+  winner: sharks
+  games: 7
+  user: joey
+
+pred_user_12:
+  series: series12
+  winner: blues
+  games: 7
+  user: joey
+
 pred_billy_2:
   series: series2
   winner: bruins
@@ -25,5 +91,17 @@ pred_sher_14:
 pred_joey_13:
   series: series13
   winner: bruins
+  games: 7
+  user: joey
+
+pred_joey_14:
+  series: series14
+  winner: sharks
+  games: 6
+  user: joey
+
+pred_joey_15:
+  series: series15
+  winner: blues
   games: 7
   user: joey

@@ -11,6 +11,10 @@ class Prediction < ApplicationRecord
     self.games == self.series.games
   end
 
+  def lower_seed_pick?
+    self.winner == self.series.team2
+  end
+
   def score # Does not yet account for MVP bonus
     if self.correct_winner?
       if self.correct_games?
