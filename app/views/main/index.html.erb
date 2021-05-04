@@ -3,3 +3,26 @@
   {{message}}
   <app></app>
 </div>
+<h3>Scoreboard</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Correct Predictions</th>
+      <th>Lower-Seed Wins Correct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.rank %></td>
+      <td><%= user.given_name %></td>
+      <td><%= user.score %></td>
+      <td><%= user.correct_predictions %></td>
+      <td><%= user.correct_lower_seed_picks %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,2 +1,22 @@
 <h1>List of all Playoff Series in 2021</h1>
 
+<p>There are <%= @series.count %> playoff series loaded so far.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Higher Seed</th>
+      <th>Lower Seed</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @series.each do |series| %>
+    <tr>
+      <td><%= series.team1.short_name %></td>
+      <td><%= series.team2.short_name %></td>
+      <td>TBA</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

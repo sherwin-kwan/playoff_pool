@@ -37,7 +37,7 @@ class User < ApplicationRecord
     self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
   end
 
-  def rank
+  def rank # Note: doesn't deal with ties yet
     Scoring.ranked_players.find_index{|user| user == self} + 1
   end
 

@@ -8,15 +8,20 @@ class SeriesController < ApplicationController
   end
 
   def create
-    puts "Not implemented yet, creating a series"
+    @this_series = Series.new(series_params)
+    if @this_series.save 
+      redirect_to series_index_path
+    else
+      redirect_to new_series_path, flash: {errors: @this_series.errors.full_messages}
+    end
   end
 
   def show
-    @series = Series.find(params[:id])
+    @this_series = Series.find(params[:id])
   end
 
   def edit
-    @series = Series.find(params[:id])
+    @this_series = Series.find(params[:id])
   end
 
   def update
@@ -25,5 +30,11 @@ class SeriesController < ApplicationController
 
   def destroy
     puts "Can't destroy, suckers!"
+  end
+
+  private
+
+  def series_params
+    params.require(:series).permit(:team1_id, :team2_id, :round_id)
   end
 end
