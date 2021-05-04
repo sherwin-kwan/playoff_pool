@@ -8,4 +8,9 @@ class PredictionsController < ApplicationController
 
   def update; end
 
+  def index
+    @predictions = Prediction.all
+    @series = Series.all
+  end
+
 end

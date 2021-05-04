@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'series/all'
   get 'predictions/new'
   get 'users/new'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -14,5 +15,6 @@ Rails.application.routes.draw do
 
   # Predictions 
   
+  resources :series
   resources :predictions
 end

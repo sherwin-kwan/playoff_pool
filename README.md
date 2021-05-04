@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Just your standard CRUD app with Ruby on Rails. No frills.
 
-Things you may want to cover:
+## Running locally
 
-* Ruby version
+0) Make sure you have Ruby installed (version 3) with bundler
+1) `git clone` to your local system
+2) `bundle install` in the project folder to install dependencies
+3) Create a PostgreSQL database and put the details in `database.yml`
+4) `rails s` starts the server at localhost:3000
 
-* System dependencies
+## Testing
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Just run `rspec` in the project directory.
