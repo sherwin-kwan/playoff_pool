@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   before_create :lowercase_email
   before_validation :lowercase_email
+  has_secure_password
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Must be a valid email format" }
