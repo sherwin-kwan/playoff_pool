@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   # Predictions 
   
   resources :series
-  resources :predictions
+  resources :predictions, except: [:new]
+  get "/round/:id/new_prediction" => "predictions#new", as: :new_prediction
 end

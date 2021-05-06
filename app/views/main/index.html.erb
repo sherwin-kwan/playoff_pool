@@ -1,9 +1,12 @@
-<h1>With Vue</h1>
+<!-- <h1>With Vue</h1>
 <div id='hello'>
   {{message}}
   <app></app>
-</div>
+</div> -->
 <h3>Scoreboard</h3>
+<%= link_to "All Series", series_index_path %>
+<%= link_to "This Round", predictions_path %>
+<%= link_to "Example", new_prediction_path({round_id: 2}) %>
 <table>
   <thead>
     <tr>

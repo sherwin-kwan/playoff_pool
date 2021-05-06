@@ -1,2 +1,24 @@
-<h1>Predictions#new</h1>
-<p>Find me in app/views/predictions/new.html.erb</p>
+
+<%= javascript_pack_tag 'prediction-form' %>
+
+<h1>Make Picks for <%= @round.fancy_name %></h1>
+
+<form action="/predictions" method="post" >
+  <div class="prediction-row">
+    <div>Series</div>
+    <div>Your pick to win</div>
+    <div>Number of games</div>
+    <div>Team 1 lineups</div>
+    <div>Team 2 lineups</div>
+  </div>
+  <% @round.series.each do |ser| %>
+  <div class="prediction-row">
+    <div><%= ser.team1.name %> vs. <%= ser.team2.name %></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <button class="submit">Submit</button>
+</form>
+<% end %>

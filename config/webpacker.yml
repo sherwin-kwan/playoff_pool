@@ -34,6 +34,8 @@ default: &default
     - .woff2
 
   extensions:
+    - .tsx
+    - .ts
     - .vue
     - .jsx
     - .mjs
@@ -52,7 +54,7 @@ default: &default
 
 development:
   <<: *default
-  compile: false
+  compile: true
 
   # Verifies that correct packages and versions are installed by inspecting package.json, yarn.lock, and node_modules
   check_yarn_integrity: true
