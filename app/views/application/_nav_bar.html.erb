@@ -1,5 +1,6 @@
 <nav class="top-nav">
   <%= link_to 'Main Page', root_path %>
+  <%= link_to 'All Series', series_index_path %>
   <% if session[:current_user] %>
     <%= link_to 'Log Out', logout_path %>
   <% else %>
