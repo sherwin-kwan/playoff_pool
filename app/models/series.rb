@@ -8,7 +8,7 @@ class Series < ApplicationRecord
   validate :team_doesnt_play_itself
   validate :series_within_division
 
-  # Validatio methods
+  # Validation methods
   def team_doesnt_play_itself
     if self.team1 == self.team2
       errors.add(:team1, "Team can't play itself!")
@@ -24,4 +24,10 @@ class Series < ApplicationRecord
   def active_predictions
     self.predictions.filter(&:active?)
   end
+
+  # Helper to make the dropdown select easier
+  def teams
+    [self.team1, self.team2]
+  end
+
 end

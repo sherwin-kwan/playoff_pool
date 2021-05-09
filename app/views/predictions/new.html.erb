@@ -1,24 +1,21 @@
+<h1>Make your Pick for <%= @prediction.series.team1.short_name %> vs. <%= @prediction.series.team2.short_name %>!</h1>
 
-<%= javascript_pack_tag 'prediction-form' %>
-
-<h1>Make Picks for <%= @round.fancy_name %></h1>
-
-<form action="/predictions" method="post" >
-  <div class="prediction-row">
-    <div>Series</div>
-    <div>Your pick to win</div>
-    <div>Number of games</div>
-    <div>Team 1 lineups</div>
-    <div>Team 2 lineups</div>
+<%= form_with model: @prediction, url: create_prediction_path(id: @prediction.series_id) do |form| %>
+<%= @prediction.user_id %>
+  <div class="form-group">
+    <%= form.label :winner, "Your Winner" %>
+    <%= collection_select(:prediction, :winner_id, @prediction.series.teams, :id, :name) %>
   </div>
-  <% @round.series.each do |ser| %>
-  <div class="prediction-row">
-    <div><%= ser.team1.name %> vs. <%= ser.team2.name %></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="form-group">
+    <%= form.label :winner, "# of Games" %>
+    <%= form.select :games, [4, 5, 6, 7] %>
   </div>
-  <button class="submit">Submit</button>
-</form>
+  <% if flash[:errors] %>
+    <ul class="error">
+      <% flash[:errors].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form.submit "Make Prediction", class: "btn btn-primary" %>
 <% end %>

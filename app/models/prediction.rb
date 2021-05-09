@@ -27,7 +27,7 @@ class Prediction < ApplicationRecord
   end
 
   def active?
-    all_predictions_by_user = self.series.predictions.find_by(user_id: self.user_id)
+    all_predictions_by_user = self.series.predictions.filter{|pred| pred.user_id = self.user_id}
     if all_predictions_by_user.count > 1
       false # Not done yet, will cause errors if someone makes 2 predictions for same series!
     else
