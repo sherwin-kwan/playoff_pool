@@ -1,30 +1,42 @@
 <h1><%= @this_series.team1.short_name %> vs. <%= @this_series.team2.short_name %></h1>
-
-<p>Result: 
-  <% if @this_series.winner.present? %>
-    <%= @this_series.winner %> won in <%= @this_series.games %> games.
-  <% else %>
-    This series has not yet been decided.
-  <% end %>
-</p>
-
-Predictions:
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Prediction</th>
-      <th>Points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @this_series.active_predictions.each do |pred| %>
-      <tr>
-        <td><%= pred.user.given_name %></td>
-        <td><%= pred.winner %> in <%= pred.games %></td>
-        <td><%= pred.score %></td>
-      </tr>
+<h3><%= @this_series.round.fancy_name %> Series</h3>
+<main>
+  <p>Result: 
+    <% if @this_series.winner.present? %>
+      <%= @this_series.winner %> won in <%= @this_series.games %> games.
+    <% else %>
+      This series has not yet been decided.
     <% end %>
-  </tbody>
-</table>
+  </p>
+
+  <p>
+  <% if session[:current_user] %>
+    <button>Make your Pick!</button>
+  <% else %>
+    Please <%= link_to "log in", login_path %> to begin making picks!
+  <% end %>
+  </p>
+
+  <div>
+  Predictions:
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Prediction</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @this_series.active_predictions.each do |pred| %>
+          <tr>
+            <td><%= pred.user.given_name %></td>
+            <td><%= pred.winner %> in <%= pred.games %></td>
+            <td><%= pred.score %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>

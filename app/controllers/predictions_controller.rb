@@ -7,7 +7,6 @@ class PredictionsController < ApplicationController
 
   def new
     @prediction = Series.find(params[:id]).predictions.new
-    p flash
   end
 
   # Note: Data is submitted through HTTP for this method

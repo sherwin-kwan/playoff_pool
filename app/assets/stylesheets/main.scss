@@ -1,3 +1,45 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "normalize.css";
+
+body {
+  width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-around;
+}
+
+button {
+  background-color:green;
+  color: white;
+  font-size: 1.2rem;
+  max-width: 20vw;
+}
+
+table {
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid black;
+    padding: 0.25rem;
+  }
+}
+
+nav.top-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #222;
+  > * {
+    margin: 1rem;
+  }
+  > a {
+    color: white;
+  }
+}
