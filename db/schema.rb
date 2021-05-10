@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_055542) do
 
   create_table "notes", force: :cascade do |t|
     t.integer "version"
+    t.string "summary"
     t.text "note"
   end
 
