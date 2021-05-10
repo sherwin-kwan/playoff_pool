@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Users
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create show]
   get "/login" => "sessions#new", as: :login
   post "/login" => "sessions#create", as: :login_submit
   get "/logout" => "sessions#destroy", as: :logout
@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   # Predictions 
   
   resources :series
-  resources :predictions, except: [:new, :create]
+  resources :predictions, except: %i[new create]
   resources :rounds, only: [:show]
-  resources :teams, only: [:index, :show]
+  resources :teams, only: %i[index show]
+  resources :notes, only: [:index]
   get "/series/:id/new_prediction" => "predictions#new", as: :new_prediction
   post "/series/:id/create_prediction" => "predictions#create", as: :create_prediction
   get "/round/:id/new_prediction" => "predictions#new_by_round", as: :new_round_prediction

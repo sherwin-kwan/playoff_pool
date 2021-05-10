@@ -5,6 +5,8 @@
 body {
   width: 90%;
   padding-left: 5%;
+  font-family: "Open Sans", sans-serif;
+  background-color: #E8F3FF
 }
 
 main {
@@ -26,10 +28,22 @@ button, input[type="submit"] {
 
 table {
   border-collapse: collapse;
-
-  th, td {
+  th {
+    border: 1px solid black;
+    padding: 0.5rem;
+    background-color: #ca8;
+  }
+  td {
     border: 1px solid black;
     padding: 0.25rem;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #4ff;
+  }
+
+  tr:nth-child(even) {
+    background-color: #cff;
   }
 }
 
@@ -57,4 +71,9 @@ div.placeholder {
 
 form {
   margin-top: 1rem;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
 }
