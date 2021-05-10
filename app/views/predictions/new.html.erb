@@ -1,4 +1,9 @@
-<h1>Make your Pick for <%= @prediction.series.team1.short_name %> vs. <%= @prediction.series.team2.short_name %>!</h1>
+<h1>Make your Pick for <%= @team1.short_name %> vs. <%= @team2.short_name %>!</h1>
+
+<div class="team-lineups">
+  <%= link_to "#{@team1.short_name} Lineup", @team1.lineup_url %>
+  <%= link_to "#{@team2.short_name} Lineup", @team2.lineup_url %>
+</div>
 
 <%= form_with model: @prediction, url: create_prediction_path(id: @prediction.series_id) do |form| %>
 <%= @prediction.user_id %>

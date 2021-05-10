@@ -7,6 +7,8 @@ class PredictionsController < ApplicationController
 
   def new
     @prediction = Series.find(params[:id]).predictions.new
+    @team1 = @prediction.series.team1
+    @team2 = @prediction.series.team2
   end
 
   # Note: Data is submitted through HTTP for this method

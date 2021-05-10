@@ -1,0 +1,7 @@
+<h1>Team Lineups</h1>
+
+<main>
+  <% @teams.each do |team| %>
+    <span><%= link_to team.name, team.lineup_url %></span>
+  <% end %>
+</main>
