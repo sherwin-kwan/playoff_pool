@@ -34,4 +34,5 @@ class Prediction < ApplicationRecord
       true
     end
   end
+
 end

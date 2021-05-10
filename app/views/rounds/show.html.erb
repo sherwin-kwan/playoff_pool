@@ -1,0 +1,30 @@
+<h1>Everyone's Picks for <%= @round.fancy_name %></h1>
+<p><%= @users_with_picks.count %> <%= @users_with_picks.count == 1 ? "user is" : "users are" %> playing!</p>
+
+<table>
+  <thead>
+    <th>Series</th>
+    <% @users_with_picks.each do |user| %>
+    <th>
+      <%= user.given_name %>
+    </th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @round.series.each do |ser| %>
+    <tr>
+      <td>
+        <%= ser.team1.short_name %> vs. <%= ser.team2.short_name %>
+      </td>
+      <% @users_with_picks.each do |user| %>
+      <td>
+        Not yet inplemented.
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% @round.series.each do |ser| %>
+  <p><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></p>
+<% end %>

@@ -7,7 +7,7 @@
 
 <h3>Scoreboard</h3>
 <%= link_to "All Series", series_index_path %>
-<%= link_to "This Round", predictions_path %>
+<%= link_to "This Round", round_path({id: @CURRENT_ROUND}) %>
 <%= link_to "Example", new_prediction_path({id: 2}) %>
 <table>
   <thead>
