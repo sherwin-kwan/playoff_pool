@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_055542) do
+ActiveRecord::Schema.define(version: 2021_05_12_061421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2021_05_10_055542) do
     t.bigint "round_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "year"
+    t.integer "status", default: 0
     t.index ["round_id"], name: "index_series_on_round_id"
     t.index ["team1_id"], name: "index_series_on_team1_id"
     t.index ["team2_id"], name: "index_series_on_team2_id"
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_05_10_055542) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "given_name"
+    t.integer "privilege", default: 0
   end
 
 end

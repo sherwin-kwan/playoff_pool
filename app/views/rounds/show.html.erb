@@ -11,20 +11,17 @@
     <% end %>
   </thead>
   <tbody>
-    <% @round.series.each do |ser| %>
+    <% @round.series.filter(&:active?).each do |ser| %>
     <tr>
       <td>
         <%= ser.team1.short_name %> vs. <%= ser.team2.short_name %>
       </td>
       <% @users_with_picks.each do |user| %>
       <td>
-        Not yet inplemented.
+        Under Construction
       </td>
       <% end %>
     </tr>
     <% end %>
   </tbody>
 </table>
-<% @round.series.each do |ser| %>
-  <p><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></p>
-<% end %>

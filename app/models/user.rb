@@ -12,6 +12,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 5 }
   validates_confirmation_of :password
 
+  enum privilege: [:regular, :admin]
+
   # Authentication related
 
   def lowercase_email

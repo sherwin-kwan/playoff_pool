@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   resources :predictions, except: %i[new create]
   resources :rounds, only: [:show]
   resources :teams, only: %i[index show]
-  resources :notes, only: [:index]
+  resources :notes, only: %i[index show]
+  get "rules" => "pages#rules", as: :rules
   get "/series/:id/new_prediction" => "predictions#new", as: :new_prediction
   post "/series/:id/create_prediction" => "predictions#create", as: :create_prediction
   get "/round/:id/new_prediction" => "predictions#new_by_round", as: :new_round_prediction

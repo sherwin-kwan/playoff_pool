@@ -8,6 +8,8 @@ class Series < ApplicationRecord
   validate :team_doesnt_play_itself
   validate :series_within_division
 
+  enum status: %i[active trash] 
+
   # Validation methods
   def team_doesnt_play_itself
     if self.team1 == self.team2

@@ -1,6 +1,6 @@
 class SeriesController < ApplicationController
   def index
-    @series = Series.all
+    @series = Series.all.filter(&:active?)
   end
 
   def new
