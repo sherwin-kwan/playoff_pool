@@ -15,8 +15,6 @@ class PredictionsController < ApplicationController
   def create
     @prediction = Series.find(params[:id]).predictions.new(predictions_params)
     @prediction.user = self.current_user
-    # If the db query fails, ActiveRecord does not throw an error, but instead the "save" method returns false.
-    # So, put a condition to handle the error.
     if @prediction.save
       redirect_to new_prediction_path(id: @prediction.series_id), flash: { winner_id: @prediction.winner_id, games: @prediction.games,
         errors: ["Your pick of #{@prediction.winner.short_name} in #{@prediction.games} has been submitted. Thank you!"]}
@@ -38,10 +36,9 @@ class PredictionsController < ApplicationController
   def update; end
 
   def index
-    @predictions = Prediction.all
+    @predictions = Prediction.all.filter(&:active?)
     @series = Series.all
   end
-
 
   private
 

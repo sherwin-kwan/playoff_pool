@@ -16,7 +16,7 @@ class Prediction < ApplicationRecord
   end
 
   def score # Does not yet account for MVP bonus
-    if self.correct_winner?
+    if self.active? && self.correct_winner?
       if self.correct_games?
         return self.series.round.base_score * 2
       else
@@ -27,12 +27,9 @@ class Prediction < ApplicationRecord
   end
 
   def active?
-    all_predictions_by_user = self.series.predictions.filter{|pred| pred.user_id = self.user_id}
-    if all_predictions_by_user.count > 1
-      false # Not done yet, will cause errors if someone makes 2 predictions for same series!
-    else
-      true
-    end
+    return false unless self.series.active?
+    newer_predictions = Prediction.all.filter{|pred| pred.series_id == self.series_id && pred.user_id == self.user_id && pred.created_at > self.created_at}
+    return newer_predictions.count > 0 ? false : true
   end
 
 end

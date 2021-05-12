@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def correct_predictions
-    self.predictions.filter(&:correct_winner?).count
+    self.predictions.filter(&:active?).filter(&:correct_winner?).count
   end
 
   def correct_lower_seed_picks

@@ -32,4 +32,12 @@ class Series < ApplicationRecord
     [self.team1, self.team2]
   end
 
+  def result
+    if self.winner
+      "#{self.winner.short_name} in #{self.games}" 
+    else
+      "TBD"
+    end
+  end
+
 end

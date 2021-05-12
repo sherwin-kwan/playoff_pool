@@ -34,4 +34,9 @@ RSpec.describe Prediction, :type => :model do
     expect(pred.score).to eq(4)
   end
 
+  it 'should classify old predictions as not active' do
+    pred = predictions(:pred_joey_9_original)
+    expect(pred.active?).to be(false)
+  end
+
 end
