@@ -1,8 +1,6 @@
 class SeriesController < ApplicationController
   def index
-    p Series.all.map(&:active?)
     @series = Series.all.filter(&:active?)
-    puts "THERE ARE #{@series.count.to_s} series"
   end
 
   def new
