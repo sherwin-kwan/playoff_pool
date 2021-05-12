@@ -28,7 +28,7 @@ class User < ApplicationRecord
   # Scoring related
 
   def score
-    self.predictions.map(&:score).reduce(&:+)
+    self.predictions.map(&:score).reduce(0, :+)
   end
 
   def correct_predictions
