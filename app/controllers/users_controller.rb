@@ -12,7 +12,9 @@ class UsersController < ApplicationController
     # So, put a condition to handle the error.
     if @user.save
       session[:current_user] = @user.id
-      redirect_to :root
+      target = session[:target_page]
+      session[:target_page] = nil
+      redirect_to target || root_path
     else
       redirect_to :new_user, flash: { original_name: @user.name, original_given_name: @user.given_name, original_email: @user.email,
                            errors: @user.errors.full_messages }

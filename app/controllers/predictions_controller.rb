@@ -50,7 +50,11 @@ class PredictionsController < ApplicationController
   end
 
   def validate_user
-    redirect_to :new_user unless session[:current_user]
+    unless session[:current_user]
+      session[:target_page] = request.url
+      puts "Target is " + session[:target_page]
+      redirect_to :login 
+    end
   end
 
 end
