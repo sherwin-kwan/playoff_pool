@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -13,8 +14,21 @@ class UsersController < ApplicationController
       session[:current_user] = @user.id
       redirect_to :root
     else
-      redirect_to :new_user, flash: { original_name: @user.name, original_given_name: @user.given_name,
+      redirect_to :new_user, flash: { original_name: @user.name, original_given_name: @user.given_name, original_email: @user.email,
                            errors: @user.errors.full_messages }
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to :edit_user, flash: { errors: ["Your profile has been updated!"]}
+    else
+      redirect_to :edit_user, flash: {name: @user.name, given_name: @user.given_name, email: @user.email, errors: @user.errors.full_messages }
     end
   end
 

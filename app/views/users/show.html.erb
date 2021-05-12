@@ -4,3 +4,7 @@
 <p>This page is under construction.</p>
 <p>Years in Pool: Unknown</p>
 <p>Favourite Quote: Unknown</p>
+
+<% if @user.id == session[:current_user] %>
+  <%= button_to "Update Your Profile", edit_user_path(id: @user.id), method: :get %>
+<% end %>

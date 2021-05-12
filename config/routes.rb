@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Users
 
-  resources :users, only: %i[new create show]
+  resources :users, only: %i[new create show edit update]
   get "/login" => "sessions#new", as: :login
   post "/login" => "sessions#create", as: :login_submit
   get "/logout" => "sessions#destroy", as: :logout
