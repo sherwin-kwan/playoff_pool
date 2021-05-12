@@ -18,7 +18,7 @@
       </td>
       <% @users_with_picks.each do |user| %>
       <td>
-        Under Construction
+        <%= @predictions.filter{|pred| pred.series_id == ser.id && pred.user_id == user.id}.first&.summary %>
       </td>
       <% end %>
     </tr>

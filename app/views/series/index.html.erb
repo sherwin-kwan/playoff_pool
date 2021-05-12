@@ -17,7 +17,7 @@
     <tr>
       <td><%= series.team1.short_name %></td>
       <td><%= series.team2.short_name %></td>
-      <td><%= series.result %></td>
+      <td><%= series.summary %></td>
       <td><%= link_to "Details", series_path(id: series.id) %></td>
       <td><%= link_to "Make your Pick!", new_prediction_path(id: series.id) %></td>
     </tr>

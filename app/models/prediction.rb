@@ -7,7 +7,7 @@ class Prediction < ApplicationRecord
     self.winner == self.series.winner
   end
 
-  def correct_games? 
+  def correct_games?
     self.games == self.series.games
   end
 
@@ -28,8 +28,11 @@ class Prediction < ApplicationRecord
 
   def active?
     return false unless self.series.active?
-    newer_predictions = Prediction.all.filter{|pred| pred.series_id == self.series_id && pred.user_id == self.user_id && pred.created_at > self.created_at}
+    newer_predictions = Prediction.all.filter { |pred| pred.series_id == self.series_id && pred.user_id == self.user_id && pred.created_at > self.created_at }
     return newer_predictions.count > 0 ? false : true
   end
 
+  def summary
+    "#{self.winner.short_name} in #{self.games}"
+  end
 end
