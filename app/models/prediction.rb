@@ -3,6 +3,8 @@ class Prediction < ApplicationRecord
   belongs_to :series
   belongs_to :winner, class_name: "Team"
 
+  validate :predict_before_series
+
   def correct_winner?
     self.winner == self.series.winner
   end
@@ -34,5 +36,12 @@ class Prediction < ApplicationRecord
 
   def summary
     "#{self.winner.short_name} in #{self.games}"
+  end
+
+  private
+  def predict_before_series 
+    if self.series.start_time < Time.now
+      errors.add(:winner_id, "Cannot make a prediction after the series has started")
+    end
   end
 end

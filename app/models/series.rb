@@ -40,4 +40,14 @@ class Series < ApplicationRecord
     end
   end
 
+  def status
+    if self.start_date > Time.now
+      :upcoming
+    elsif self.winner = nil
+      :ongoing
+    else
+      :dompleted
+    end
+  end
+
 end

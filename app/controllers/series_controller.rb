@@ -4,7 +4,10 @@ class SeriesController < ApplicationController
   end
 
   def new
-    @this_series = Series.new
+    unless User.find(session[:current_user]).admin?
+      render "application/error", {locals: {message: "You do not have permission to view this page"}}
+    end
+    @this_series = Series.new 
   end
 
   def create

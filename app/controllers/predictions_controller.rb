@@ -33,7 +33,9 @@ class PredictionsController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    render plain: "Updating is not allowed, just create a new one"
+  end
 
   def index
     @predictions = Prediction.all.filter(&:active?)

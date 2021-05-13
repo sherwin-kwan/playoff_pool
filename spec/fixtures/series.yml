@@ -4,6 +4,7 @@ series1:
   round_id: 1
   winner: jackets
   games: 4
+  start_time: "2019-04-01"
 
 series2:
   team1: bruins
