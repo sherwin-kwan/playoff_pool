@@ -13,6 +13,10 @@
     <%= form.label :round, "Round" %>
     <%= collection_select(:series, :round_id, Round.all, :id, :fancy_name) %>
   </div>
+  <div class="form-group">
+    <%= form.label :start_time, "Start Time" %>
+    <%= datetime_select(:series, :start_time, start_year: 2021, ampm: true )%>
+  </div>
   <% if flash[:errors] %>
     <ul class="error">
       <% flash[:errors].each do |message| %>
