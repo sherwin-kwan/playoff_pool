@@ -24,6 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'libv8-node'
 
+gem 'nhl', git: 'git://github.com/joshua-arts/nhl-ruby.git'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

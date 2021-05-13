@@ -32,7 +32,7 @@
         <% @this_series.active_predictions.each do |pred| %>
           <tr>
             <td><%= pred.user.given_name %></td>
-            <td><%= pred.winner %> in <%= pred.games %></td>
+            <td><%= pred.winner.short_name %> in <%= pred.games %></td>
             <td><%= pred.score %></td>
           </tr>
         <% end %>
