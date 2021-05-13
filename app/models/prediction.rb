@@ -40,7 +40,7 @@ class Prediction < ApplicationRecord
 
   private
   def predict_before_series 
-    if self.series.start_time < Time.now
+    if self.series.start_time && self.series.start_time < Time.now
       errors.add(:winner_id, "Cannot make a prediction after the series has started")
     end
   end
