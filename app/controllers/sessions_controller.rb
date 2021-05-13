@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     user = User.authenticate_with_email(params[:email], params[:password])
     if user
       session[:current_user] = user.id
-      route_after_login
       target = session[:target_page]
       session[:target_page] = nil
       redirect_to target || root_path
