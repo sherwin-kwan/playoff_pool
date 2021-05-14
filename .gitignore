@@ -37,3 +37,7 @@ yarn-debug.log*
 
 # Apple files
 .DS_Store
+
+# env files
+.env.development
+.env.test

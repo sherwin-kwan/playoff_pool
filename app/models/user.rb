@@ -43,4 +43,8 @@ class User < ApplicationRecord
     Scoring.ranked_players.find_index{|user| user == self} + 1
   end
 
+  def has_prediction_for?(series)
+    self.predictions.find_by(series: series) ? true : false
+  end
+
 end

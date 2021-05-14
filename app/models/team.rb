@@ -13,4 +13,16 @@ class Team < ApplicationRecord
       self.name.downcase.gsub(" ", "-")
     end
   end
+
+  def nhl_id
+    NHL::Team.find_short_name(self.short_name).id
+  end
+
+  def venue_name
+    NHL::Team.find_short_name(self.short_name).venue_name
+  end
+
+  def logo_src
+    NHL::Team.find(self.nhl_id).image
+  end
 end

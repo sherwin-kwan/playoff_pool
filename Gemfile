@@ -24,7 +24,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'libv8-node'
 
-gem 'nhl', git: 'git://github.com/joshua-arts/nhl-ruby.git'
+gem 'nhl', git: 'git@github.com:sherwin-kwan/nhl-ruby.git'
+
+# Use this when doing local testing with the NHL gem fork
+# gem 'nhl', path: '../gems/nhl-ruby'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -37,6 +40,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do

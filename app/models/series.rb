@@ -50,4 +50,13 @@ class Series < ApplicationRecord
     end
   end
 
+  def user_has_prediction?(user_id)
+    User.find(user_id).has_prediction_for?(self)
+  end
+
+  def start_time_formatted
+    time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"]) 
+    return self.start_time ? self.start_time.in_time_zone(time_zone).strftime("%F at %H:%M") : "Not available"
+  end
+
 end
