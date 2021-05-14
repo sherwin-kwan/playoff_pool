@@ -43,7 +43,7 @@ class SeriesController < ApplicationController
   private
 
   def series_params
-    params.require(:series).permit(:team1_id, :team2_id, :round_id, :start_time)
+    params.require(:series).permit(:team1_id, :team2_id, :round_id, :start_time, :year)
   end
 
   def check_privileges
