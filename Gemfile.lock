@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:sherwin-kwan/nhl-ruby.git
+  remote: https://github.com/sherwin-kwan/nhl-ruby.git
   revision: 3968bad4edf9fc233eaa0af63bf510c742464b95
   specs:
     nhl (1.0.0)
