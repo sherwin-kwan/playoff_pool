@@ -1,9 +1,41 @@
-<h1><%= @user.given_name %>'s Profile</h1>
+<h1><%= @user.given_name.length > 0 ? @user.given_name : @user.name %>'s Profile</h1>
 
 <p>Full Name: <%= @user.name %></p>
-<p>This page is under construction.</p>
+<p>About Me: <%= @user.about_text %></p>
 <p>Years in Pool: Unknown</p>
-<p>Favourite Quote: Unknown</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Series</th>
+      <th>Pick</th>
+      <th>Points</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @series.each do |ser| %>
+    <tr>
+      <td><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></td>
+      <% pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
+      if pred %>
+      <td><%= pred.winner.short_name %> in <%= pred.games %></td>
+      <td><%= ser.status == :complete ? pred.score : "?" %></td>
+      <% elsif ser.status == :upcoming %>
+      <td>Hasn't picked yet</td>
+      <td>??</td>
+      <% else %>
+      <td>Didn't pick</td>
+      <td>0</td>
+      <% end %>
+    </tr>
+    <% end %>
+    <tr class="total">
+      <td>TOTAL</td>
+      <td></td>
+      <td><%= @user.score %></td>
+    </tr>
+  </tbody>
+</table>
 
 <% if @user.id == session[:current_user] %>
   <%= button_to "Update Your Profile", edit_user_path(id: @user.id), method: :get %>

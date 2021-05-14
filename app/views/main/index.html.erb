@@ -22,7 +22,7 @@
     <% @users.each do |user| %>
     <tr>
       <td><%= user.rank %></td>
-      <td><%= link_to user.given_name, user_path(id: user.id) %></td>
+      <td><%= link_to user.given_name.length > 0 ? user.given_name : user.name, user_path(id: user.id) %></td>
       <td><%= user.score %></td>
       <td><%= user.correct_predictions %></td>
       <td><%= user.correct_lower_seed_picks %></td>

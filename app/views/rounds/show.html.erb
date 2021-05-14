@@ -6,7 +6,7 @@
     <th>Series</th>
     <% @users_with_picks.each do |user| %>
     <th>
-      <%= user.given_name %>
+      <%= user.given_name.length > 0 ? user.given_name : user.name %>
     </th>
     <% end %>
   </thead>

@@ -41,9 +41,9 @@ class Series < ApplicationRecord
   end
 
   def status
-    if self.start_date > Time.now
+    if self.start_time == nil || self.start_time > Time.now
       :upcoming
-    elsif self.winner = nil
+    elsif self.winner == nil
       :ongoing
     else
       :dompleted
