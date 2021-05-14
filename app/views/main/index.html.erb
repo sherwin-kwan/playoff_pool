@@ -8,8 +8,6 @@
 <h3>Scoreboard</h3>
 <%= link_to "All Series", series_index_path %>
 <%= link_to "This Round", round_path({id: @CURRENT_ROUND}) %>
-
-<%= @teams.to_json %>
 <table>
   <thead>
     <tr>
