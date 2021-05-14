@@ -24,7 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'libv8-node'
 
-gem 'nhl', git: 'git@github.com:sherwin-kwan/nhl-ruby.git'
+gem 'nhl', git: 'https://github.com/sherwin-kwan/nhl-ruby.git'
 
 # Use this when doing local testing with the NHL gem fork
 # gem 'nhl', path: '../gems/nhl-ruby'
