@@ -1,10 +1,10 @@
 class Scoring
 
-  def self.leader
-    self.ranked_players[0]
+  def self.leader(year = Time.now.year)
+    self.ranked_players(year)[0]
   end
 
-  def self.ranked_players
-    User.all.sort_by{|u| u.score + u.correct_predictions * 0.01 + u.correct_lower_seed_picks * 0.0001}.reverse
+  def self.ranked_players(year = Time.now.year)
+    User.all.filter{|u| u.with_picks?(year)}.sort_by{|u| u.score_with_tiebreaker}.reverse
   end
 end
