@@ -73,8 +73,20 @@ class User < ApplicationRecord
     self.predictions.find_by(series: series) ? true : false
   end
 
-  def with_picks?(year = Time.now.year)
+  def has_picks?(year = Time.now.year)
     Series.where(year: year).filter{|ser| ser.user_has_prediction?(self.id)}.count > 0
+  end
+
+  def years_in_pool
+    self.results.count + (self.has_picks? ? 1 : 0)
+  end
+
+  def most_recent_active_year
+    if self.has_picks?
+      Time.now.year
+    else
+      self.results.map(&:year).max
+    end
   end
 
 end

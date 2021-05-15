@@ -2,40 +2,68 @@
 
 <p>Full Name: <%= @user.name %></p>
 <p>About Me: <%= @user.about_text %></p>
-<p>Years in Pool: Unknown</p>
+<p>Years in Pool: <%= @user.years_in_pool %></p>
+<p>Most Recently Played in: <%= @user.most_recent_active_year %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Series</th>
-      <th>Pick</th>
-      <th>Points</th>
-  </tr>
-  </thead>
-  <tbody>
-    <% @series.each do |ser| %>
-    <tr>
-      <td><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></td>
-      <% pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
-      if pred %>
-      <td><%= pred.winner.short_name %> in <%= pred.games %></td>
-      <td><%= ser.status == :complete ? pred.score : "?" %></td>
-      <% elsif ser.status == :upcoming %>
-      <td>Hasn't picked yet</td>
-      <td>??</td>
-      <% else %>
-      <td>Didn't pick</td>
-      <td>0</td>
+<% if @user.has_picks? %>
+  <h3>This Year's Picks</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Series</th>
+        <th>Pick</th>
+        <th>Points</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @series.each do |ser| %>
+      <tr>
+        <td><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></td>
+        <% pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
+        if pred %>
+        <td><%= pred.winner.short_name %> in <%= pred.games %></td>
+        <td><%= ser.status == :complete ? pred.score : "??" %></td>
+        <% elsif ser.status == :upcoming %>
+        <td>Hasn't picked yet</td>
+        <td>??</td>
+        <% else %>
+        <td>Didn't pick</td>
+        <td>0</td>
+        <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-    <tr class="total">
-      <td>TOTAL</td>
-      <td></td>
-      <td><%= @user.score %></td>
-    </tr>
-  </tbody>
-</table>
+      <tr class="total">
+        <td>TOTAL</td>
+        <td></td>
+        <td><%= @user.score %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @user.results.count > 0 %>
+  <h3>Previous Years</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Record</th>
+        <th>Points</th>
+        <th>Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.results.each do |result| %>
+        <tr>
+          <td><%= link_to result.year, previous_results_path(year: result.year) %></td>
+          <td><%= result.correct %>-<%= result.incorrect %></td>
+          <td><%= result.points %></td>
+          <td><%= @user.rank(result.year).ordinalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <% if @user.id == session[:current_user] %>
   <%= button_to "Update Your Profile", edit_user_path(id: @user.id), method: :get %>
