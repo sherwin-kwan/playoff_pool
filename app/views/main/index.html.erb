@@ -5,28 +5,9 @@
 </div> -->
 <h1>Stanley Cup Playoff Pool 2021</h1>
 
-<h3>Scoreboard</h3>
-<%= link_to "All Series", series_index_path %>
-<%= link_to "This Round", round_path({id: @CURRENT_ROUND}) %>
-<table>
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Name</th>
-      <th>Points</th>
-      <th>Correct Predictions</th>
-      <th>Lower-Seed Wins Correct</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.rank %></td>
-      <td><%= link_to user.given_name.length > 0 ? user.given_name : user.name, user_path(id: user.id) %></td>
-      <td><%= user.score %></td>
-      <td><%= user.correct_predictions %></td>
-      <td><%= user.correct_lower_seed_picks %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%# link_to "All Series", series_index_path %>
+<%# link_to "This Round", round_path({id: @CURRENT_ROUND}) %>
+
+<%= render 'scoreboard', year: Time.now.year, users: @users %>
+
