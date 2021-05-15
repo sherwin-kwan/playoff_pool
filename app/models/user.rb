@@ -25,34 +25,47 @@ class User < ApplicationRecord
     return user if user&.authenticate(password)
   end
 
-  # Scoring related
+  # Scoring related - For years before 2021, these are looked up from the results table created by seed_old_results instead of from the live app
 
-  def score
-    self.predictions.map(&:score).reduce(0, :+)
+  def old_result!(year)
+    self.results.find_by(year: year)
   end
 
-  def score_with_tiebreaker
-    self.score + self.correct_predictions * 0.01 + self.correct_lower_seed_picks * 0.0001
-  end
-
-  def correct_predictions
-    self.predictions.filter(&:active?).filter(&:correct_winner?).count
-  end
-
-  def correct_lower_seed_picks
-    self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
-  end
-
-  def rank(year = Time.now.year) # Note: doesn't deal with ties yet
+  def score(year = Time.now.year)
     if year >= 2021
-      User.all.filter{|u| (u.score_with_tiebreaker - self.score_with_tiebreaker) > 0}.count + 1
+      self.predictions.map(&:score).reduce(0, :+)
     else
-      begin
-        Result.where(year: year).filter{|res| res.points_with_tiebreaker - self.results.find_by(year: year).points_with_tiebreaker > 0}.count + 1
-      rescue NoMethodError # If the user did not participate in a certain year, then self.results.find_by is nil. Return -1 to signify this error
-        -1
-      end
+      self.old_result!(year)&.points
     end
+  end
+
+  def correct_predictions(year = Time.now.year)
+    if year >= 2021
+      self.predictions.filter(&:active?).filter(&:correct_winner?).count
+    else
+      self.old_result!(year)&.correct 
+    end
+  end
+
+  def correct_lower_seed_picks(year = Time.now.year)
+    if year >= 2021
+      self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
+    else
+      self.old_result!(year)&.lower_seed_correct
+    end
+  end
+
+  def score_with_tiebreaker(year)
+    begin
+      self.score(year) + self.correct_predictions(year) * 0.01 + self.correct_lower_seed_picks(year) * 0.0001
+      # If the user did not participate in a certain year, then these values will be nil. Return -99 to signify this error
+    rescue NoMethodError 
+      -99
+    end
+  end
+
+  def rank(year = Time.now.year) 
+      User.all.filter{|u| (u.score_with_tiebreaker(year) - self.score_with_tiebreaker(year)) > 0}.count + 1
     # Scoring.ranked_players(year).find_index{|user| user == self} + 1
   end
 
