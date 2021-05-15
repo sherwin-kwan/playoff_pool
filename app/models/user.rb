@@ -1,4 +1,3 @@
-require_relative '../../lib/assets/scoring.rb'
 
 class User < ApplicationRecord
   has_many :predictions
@@ -45,7 +44,15 @@ class User < ApplicationRecord
   end
 
   def rank(year = Time.now.year) # Note: doesn't deal with ties yet
-    User.all.filter{|u| (u.score_with_tiebreaker - self.score_with_tiebreaker) > 0}.count + 1
+    if year >= 2021
+      User.all.filter{|u| (u.score_with_tiebreaker - self.score_with_tiebreaker) > 0}.count + 1
+    else
+      begin
+        Result.where(year: year).filter{|res| res.points_with_tiebreaker - self.results.find_by(year: year).points_with_tiebreaker > 0}.count + 1
+      rescue NoMethodError # If the user did not participate in a certain year, then self.results.find_by is nil. Return -1 to signify this error
+        -1
+      end
+    end
     # Scoring.ranked_players(year).find_index{|user| user == self} + 1
   end
 
