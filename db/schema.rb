@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_071310) do
+ActiveRecord::Schema.define(version: 2021_05_15_063040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(version: 2021_05_14_071310) do
     t.index ["series_id"], name: "index_predictions_on_series_id"
     t.index ["user_id"], name: "index_predictions_on_user_id"
     t.index ["winner_id"], name: "index_predictions_on_winner_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "year"
+    t.integer "correct"
+    t.integer "incorrect"
+    t.integer "points"
+    t.integer "lower_seed_correct"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_results_on_user_id"
   end
 
   create_table "rounds", force: :cascade do |t|

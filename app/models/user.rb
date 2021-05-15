@@ -2,6 +2,7 @@ require_relative '../../lib/assets/scoring.rb'
 
 class User < ApplicationRecord
   has_many :predictions
+  has_many :results
 
   before_create :lowercase_email
   before_validation :lowercase_email
@@ -45,6 +46,10 @@ class User < ApplicationRecord
 
   def has_prediction_for?(series)
     self.predictions.find_by(series: series) ? true : false
+  end
+
+  def with_picks?
+    self.predictions.find_by(year: Time.now.year).count > 0
   end
 
 end
