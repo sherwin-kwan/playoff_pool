@@ -11,7 +11,9 @@
 
   <p>
   <% if session[:current_user] %>
-    <button>Make your Pick!</button>
+    <%# <button>Make your Pick!</button> %>
+    <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
+
   <% else %>
     Please <%= link_to "log in", login_path %> to begin making picks!
   <% end %>
@@ -32,7 +34,7 @@
         <% @this_series.active_predictions.each do |pred| %>
           <tr>
             <td><%= pred.user.given_name %></td>
-            <td><%= pred.winner %> in <%= pred.games %></td>
+            <td><%= pred.winner.short_name %> in <%= pred.games %></td>
             <td><%= pred.score %></td>
           </tr>
         <% end %>
