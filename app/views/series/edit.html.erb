@@ -10,12 +10,16 @@
     <%= collection_select(:series, :team2_id, Team.all, :id, :name, {selected: @this_series.team2_id}) %>
   </div>
   <div class="form-group">
+    <%= form.label :year, "Year" %>
+    <%= form.text_field :year, class: 'form-control', value: @this_series.year || Time.now.year %>
+  </div>
+  <div class="form-group">
     <%= form.label :round, "Round" %>
     <%= collection_select(:series, :round_id, Round.all, :id, :fancy_name, {selected: @this_series.round_id}) %>
   </div>
   <div class="form-group">
     <%= form.label :start_time, "Start Time" %>
-    <%= datetime_select(:series, :start_time, start_year: 2021, ampm: true )%>
+    <%= datetime_select(:series, :start_time, start_year: 2021, ampm: true, value: @this_series.start_time)%>
   </div>
   <% if flash[:errors] %>
     <ul class="error">
@@ -24,5 +28,5 @@
       <% end %>
     </ul>
   <% end %>
-  <%= form.submit "Create Series", class: "btn btn-primary" %>
+  <%= form.submit "Edit Series", class: "btn btn-primary" %>
 <% end %>

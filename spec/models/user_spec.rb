@@ -36,5 +36,12 @@ RSpec.describe User, :type => :model do
       expect(sherwin.rank).to eq(2)
     end
 
+    it 'should return the correct response to has_prediction_for' do
+      sherwin = users(:sherwin)
+      expect(sherwin.has_prediction_for?(series(:series15))).to be(false)
+      expect(sherwin.has_prediction_for?(series(:series14))).to be(true)
+      expect(series(:series14).user_has_prediction?(sherwin.id)).to be(true)
+    end
+
   end
 end

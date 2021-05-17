@@ -45,6 +45,9 @@ table {
   tr:nth-child(even) {
     background-color: #cff;
   }
+  tr.total {
+    background-color: #ff8;
+  }
 }
 
 nav.top-nav {
@@ -76,4 +79,24 @@ form {
 footer {
   margin-top: 2rem;
   text-align: center;
+}
+
+div.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  > * {
+    margin: 0.2rem 1rem 0.2rem 0rem;
+  }
+
+  &.textarea-group {
+    align-items: flex-start;
+
+    textarea {
+      width: 40vw;
+      height: 5rem;
+    }
+  }
 }

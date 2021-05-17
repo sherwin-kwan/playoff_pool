@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/sherwin-kwan/nhl-ruby.git
+  revision: 3968bad4edf9fc233eaa0af63bf510c742464b95
+  specs:
+    nhl (1.0.0)
+      faraday
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -77,7 +84,20 @@ GEM
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -102,6 +122,7 @@ GEM
       libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multipart-post (2.1.1)
     nio4r (2.5.7)
     nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
@@ -171,6 +192,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
+    ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -231,10 +253,12 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  dotenv-rails
   jbuilder (~> 2.7)
   libv8-node
   listen (~> 3.2)
   mini_racer
+  nhl!
   pg (>= 0.18, < 2.0)
   pry
   pry-rails

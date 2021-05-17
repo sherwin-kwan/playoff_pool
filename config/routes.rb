@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   resources :rounds, only: [:show]
   resources :teams, only: %i[index show]
   resources :notes, only: %i[index show]
-  get "rules" => "pages#rules", as: :rules
+  get "/rules" => "pages#rules", as: :rules
+  get '/results/:year' => "results#show", as: :previous_results
   get "/series/:id/new_prediction" => "predictions#new", as: :new_prediction
   post "/series/:id/create_prediction" => "predictions#create", as: :create_prediction
   get "/round/:id/new_prediction" => "predictions#new_by_round", as: :new_round_prediction

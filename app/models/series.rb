@@ -41,13 +41,22 @@ class Series < ApplicationRecord
   end
 
   def status
-    if self.start_date > Time.now
+    if self.start_time == nil || self.start_time > Time.now
       :upcoming
-    elsif self.winner = nil
+    elsif self.winner == nil
       :ongoing
     else
       :dompleted
     end
+  end
+
+  def user_has_prediction?(user_id)
+    User.find(user_id).has_prediction_for?(self)
+  end
+
+  def start_time_formatted
+    time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"]) 
+    return self.start_time ? (time_zone ? self.start_time.in_time_zone(time_zone).strftime("%F at %H:%M") : self.start_time.strftime("%F at %H:%M")) : "Not available"
   end
 
 end
