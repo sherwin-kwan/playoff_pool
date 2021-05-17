@@ -11,7 +11,9 @@
 
   <p>
   <% if session[:current_user] %>
-    <button>Make your Pick!</button>
+    <%# <button>Make your Pick!</button> %>
+    <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
+
   <% else %>
     Please <%= link_to "log in", login_path %> to begin making picks!
   <% end %>

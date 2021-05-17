@@ -2,6 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.button {
+    background-color:green;
+    color: white;
+    font-size: 1.2rem;
+    max-width: 20vw;
+    margin: 0.5rem 0;
+    padding: 0.25rem;
+    border-width: 2px;
+    border-style: outset;
+    border-top-color: gray;
+    border-left-color: gray;
+    border-right-color: black;
+    border-bottom-color: black;
+  
+  &:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-right-color: gray;
+    border-bottom-color: gray;
+    border-style: inset;
+    }
+ }
+
 td img {
   max-width: 120px;
   max-height: 120px;
