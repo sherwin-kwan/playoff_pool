@@ -11,9 +11,11 @@
 
   <p>
   <% if session[:current_user] %>
-    <%# <button>Make your Pick!</button> %>
-    <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
-
+    <% if @this_series.start_time.present? && @this_series.start_time > Time.now %>
+      <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
+    <% else %>
+      This series has already started.
+    <% end %>
   <% else %>
     Please <%= link_to "log in", login_path %> to begin making picks!
   <% end %>
