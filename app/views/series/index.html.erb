@@ -21,7 +21,13 @@
       <td><%= series.summary %></td>
       <td><%= series.start_time_formatted %></td>
       <td><%= link_to "Details", series_path(id: series.id) %></td>
-      <td><%= link_to series.user_has_prediction?(session[:current_user]) ? "Change your Pick!" : "Make your Pick!", new_prediction_path(id: series.id) %></td>
+      <td>
+        <% if series.start_time.present? && series.start_time < Time.now %>
+          Picks cannot be made after the series starts.
+        <% else %>
+          <%= link_to session[:current_user] && series.user_has_prediction?(session[:current_user]) ? "Change your Pick!" : "Make your Pick!", new_prediction_path(id: series.id) %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
