@@ -1,3 +1,30 @@
-<h1><%= @team %></h1>
+<h1><%= @team.name %></h1>
 
 <p>This page is under construction.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Venue</th>
+      <th>Opponent</th>
+      <th>Score</th>
+      <th>Status</th>
+      <th>Series Score</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @schedule.each do |game| %>
+    <tr>
+      <td><%= game.date %></td>
+      <td><%= game.time %></td>
+      <td><%= game.venue_name %></td>
+      <td><%= link_to game.opponent.short_name, team_path(game.opponent.id) %></td>
+      <td><%= link_to game.score, game.url %></td>
+      <td><%= game.status %></td>
+      <td>Under construction</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

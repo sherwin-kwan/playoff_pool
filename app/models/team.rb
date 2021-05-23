@@ -14,6 +14,13 @@ class Team < ApplicationRecord
     end
   end
 
+  def playoff_schedule
+    @schedule = NHL::Game.playoff_schedule(Time.now.year, self.nhl_id)
+    @schedule.map do |game|
+      Game.new(game, self)
+    end
+  end
+
   def nhl_id
     NHL::Team.find_short_name(self.short_name).id
   end

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/sherwin-kwan/nhl-ruby.git
-  revision: 3968bad4edf9fc233eaa0af63bf510c742464b95
+  revision: 86fef868998a509a13355c221fd79dbd07a53480
   specs:
     nhl (1.0.0)
       faraday
@@ -89,16 +89,20 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
-    faraday (1.4.1)
+    faraday (1.4.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
-    ffi (1.15.0)
+    ffi (1.15.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -124,9 +128,9 @@ GEM
     msgpack (1.4.2)
     multipart-post (2.1.1)
     nio4r (2.5.7)
-    nokogiri (1.11.3-x86_64-darwin)
+    nokogiri (1.11.5-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.11.3-x86_64-linux)
+    nokogiri (1.11.5-x86_64-linux)
       racc (~> 1.4)
     pg (1.2.3)
     pry (0.14.1)
@@ -135,7 +139,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (4.3.7)
+    puma (4.3.8)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)

@@ -5,5 +5,6 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @schedule = @team.playoff_schedule
   end
 end
