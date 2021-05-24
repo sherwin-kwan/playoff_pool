@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   def correct_lower_seed_picks(year = Time.now.year)
     if year >= 2021
-      self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
+      self.predictions.filter(&:active?).filter(&:correct_winner?).filter(&:lower_seed_pick?).count
     else
       self.old_result!(year)&.lower_seed_correct
     end

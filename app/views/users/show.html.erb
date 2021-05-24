@@ -17,12 +17,24 @@
     </thead>
     <tbody>
       <% @series.each do |ser| %>
-      <tr>
+      <%         
+      pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
+      success_class = ser.winner.present? && case pred.score
+        when 0
+          "wrong-prediction"
+        when 1
+          "right-prediction"
+        when 2
+          "right-games"
+        else
+          ""
+        end
+      %>
+      <tr class="<%= success_class %>">
         <td><%= ser.team1.short_name %> vs. <%= ser.team2.short_name %></td>
-        <% pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
-        if pred %>
+        <% if pred %>
         <td><%= pred.winner.short_name %> in <%= pred.games %></td>
-        <td><%= ser.status == :complete ? pred.score : "??" %></td>
+        <td><%= ser.status == :completed ? pred.score : "??" %></td>
         <% elsif ser.status == :upcoming %>
         <td>Hasn't picked yet</td>
         <td>??</td>

@@ -1,9 +1,14 @@
 <h1>Everyone's Picks for <%= @round.fancy_name %></h1>
 <p><%= @users_with_picks.count %> <%= @users_with_picks.count == 1 ? "user is" : "users are" %> playing!</p>
-
+<div class="hor-links">
+  <% @rounds.each do |round| %>
+    <%= link_to round.fancy_name, round_path(id: round.id) %>
+  <% end %>
+</div>
 <table>
   <thead>
     <th>Series</th>
+    <th>Result</th>
     <% @users_with_picks.each do |user| %>
     <th>
       <%= user.given_name.length > 0 ? user.given_name : user.name %>
@@ -16,9 +21,24 @@
       <td>
         <%= ser.team1.short_name %> vs. <%= ser.team2.short_name %>
       </td>
+      <td class="result">
+        <%= ser.winner.present? ? "#{ser.winner.short_name} in #{ser.games}" : "TBD" %>
+      </td>
       <% @users_with_picks.each do |user| %>
-      <td>
-        <%= @predictions.filter{|pred| pred.series_id == ser.id && pred.user_id == user.id}.first&.summary %>
+      <% prediction = @predictions.filter{|pred| pred.series_id == ser.id && pred.user_id == user.id}.first
+        success_class = ser.winner.present? && case prediction.score
+        when 0
+          "wrong-prediction"
+        when 1
+          "right-prediction"
+        when 2
+          "right-games"
+        else
+          ""
+        end
+      %>
+      <td class="<%= success_class %>">
+        <%= prediction&.summary %>
       </td>
       <% end %>
     </tr>

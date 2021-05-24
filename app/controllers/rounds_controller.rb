@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
 
   def show
+    @rounds = Round.all
     @round = Round.find(params[:id])
     @predictions = Prediction.all.filter{|pred| pred.active? && pred.series.round.id.to_s == params[:id]}
     puts @predictions.count.to_s + " picks"

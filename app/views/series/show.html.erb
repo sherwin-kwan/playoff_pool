@@ -3,7 +3,7 @@
 <main>
   <p>Result: 
     <% if @this_series.winner.present? %>
-      <%= @this_series.winner %> won in <%= @this_series.games %> games.
+      <%= @this_series.winner.name %> won in <%= @this_series.games %> games.
     <% else %>
       This series has not yet been decided.
     <% end %>
@@ -13,6 +13,8 @@
   <% if session[:current_user] %>
     <% if @this_series.start_time.present? && @this_series.start_time > Time.now %>
       <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
+    <% elsif @this_series.winner.present? %>
+      This series is finished.
     <% else %>
       This series has already started.
     <% end %>

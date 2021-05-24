@@ -18,3 +18,31 @@ div.team-lineups {
     font-weight: bold;
   }
 }
+
+.wrong-prediction {
+  background-color: red;
+  > * {
+    background-color: red;
+  }
+}
+
+.right-prediction {
+  background-color: lime;
+  > * {
+    background-color: lime;
+  }
+}
+
+.right-games {
+  background-color: #0b0;
+  > * {
+    background-color: #0b0;
+  }
+}
+
+.result {
+  background-color: yellow;
+  > * {
+    background-color: yellow;
+  }
+}
