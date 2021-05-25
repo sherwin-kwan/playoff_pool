@@ -13,7 +13,7 @@
   <tbody>
     <% users.each do |user| %>
     <tr>
-      <td><%# user.rank(year) %></td>
+      <!--<td><%= user.rank(year) %></td>-->
       <td><%= link_to user.given_name.length > 0 ? user.given_name : user.name, user_path(id: user.id) %></td>
       <td><%= user.score(year) %></td>
       <td><%= user.correct_predictions(year) %></td>
