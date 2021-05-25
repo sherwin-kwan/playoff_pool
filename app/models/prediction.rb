@@ -6,7 +6,7 @@ class Prediction < ApplicationRecord
   validate :predict_before_series
 
   def correct_winner?
-    self.winner == self.series.winner
+    self.winner_id == self.series.winner_id
   end
 
   def correct_games?
@@ -14,7 +14,7 @@ class Prediction < ApplicationRecord
   end
 
   def lower_seed_pick?
-    self.winner == self.series.team2
+    self.winner_id == self.series.team2_id
   end
 
   def score # Does not yet account for MVP bonus
@@ -30,7 +30,7 @@ class Prediction < ApplicationRecord
 
   def active?
     return false unless self.series.active?
-    newer_predictions = Prediction.all.filter { |pred| pred.series_id == self.series_id && pred.user_id == self.user_id && pred.created_at > self.created_at }
+    newer_predictions = Prediction.where(series_id: self.series_id).where(user_id: self.user_id).where("created_at > ?", self.created_at)
     return newer_predictions.count > 0 ? false : true
   end
 

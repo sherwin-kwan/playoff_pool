@@ -19,7 +19,7 @@
       <% @series.each do |ser| %>
       <%         
       pred = @user.predictions.filter(&:active?).filter{|p| p.series_id == ser.id}.first
-      success_class = ser.winner.present? && case pred.score
+      success_class = ser.winner_id && case pred.score
         when 0
           "wrong-prediction"
         when 1
@@ -53,7 +53,7 @@
   </table>
 <% end %>
 
-<% if @user.results.count > 0 %>
+<% if @user.results.load.size > 0 %>
   <h3>Previous Years</h3>
   <table>
     <thead>

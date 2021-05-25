@@ -41,6 +41,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'query_count'
 end
 
 group :development do

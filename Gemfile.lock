@@ -141,6 +141,8 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
+    query_count (1.0.0)
+      rails (>= 5.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -267,6 +269,7 @@ DEPENDENCIES
   pry
   pry-rails
   puma (~> 4.1)
+  query_count
   rails (~> 6.0.3, >= 6.0.3.5)
   rexml
   rspec-rails

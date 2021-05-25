@@ -33,7 +33,7 @@ class Series < ApplicationRecord
   end
 
   def summary
-    if self.winner
+    if self.winner_id
       "#{self.winner.short_name} in #{self.games}" 
     else
       "TBD"
@@ -43,7 +43,7 @@ class Series < ApplicationRecord
   def status
     if self.start_time == nil || self.start_time > Time.now
       :upcoming
-    elsif self.winner == nil
+    elsif self.winner_id == nil
       :ongoing
     else
       :completed

@@ -2,7 +2,7 @@
 <h3><%= @this_series.round.fancy_name %> Series</h3>
 <main>
   <p>Result: 
-    <% if @this_series.winner.present? %>
+    <% if @this_series.winner_id %>
       <%= @this_series.winner.name %> won in <%= @this_series.games %> games.
     <% else %>
       This series has not yet been decided.
@@ -11,9 +11,9 @@
 
   <p>
   <% if session[:current_user] %>
-    <% if @this_series.start_time.present? && @this_series.start_time > Time.now %>
+    <% if @this_series.start_time && @this_series.start_time > Time.now %>
       <%= link_to "Make your Pick!", new_prediction_path, class: "button" %>
-    <% elsif @this_series.winner.present? %>
+    <% elsif @this_series.winner_id %>
       This series is finished.
     <% else %>
       This series has already started.
