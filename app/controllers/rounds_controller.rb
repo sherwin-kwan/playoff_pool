@@ -3,7 +3,8 @@ class RoundsController < ApplicationController
   def show
     @rounds = Round.all.select([:id, :fancy_name])
     @round = Round.find(params[:id])
-    @predictions = Prediction.all.includes(:winner).filter{|pred| pred.series.round.id.to_s == params[:id]}
+    @series = @round.series.includes(:team1).includes(:team2).includes(:winner)
+    @predictions = @series.map{|ser| ser.predictions.includes(:winner)}.flatten
     @users_with_picks = User.find(self.users_with_picks.map{|h| h["id"]})
   end
 

@@ -16,7 +16,7 @@
     <% end %>
   </thead>
   <tbody>
-    <% @round.series.filter(&:active?).each do |ser| %>
+    <% @series.filter(&:active?).each do |ser| %>
     <tr>
       <td>
         <%= ser.team1.short_name %> vs. <%= ser.team2.short_name %>
