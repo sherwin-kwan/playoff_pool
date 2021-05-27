@@ -1,10 +1,11 @@
 <h1>List of all Playoff Series in 2021</h1>
 
-<p>Make your picks for the first round below:</p>
+<p>Make your picks for the next round below:</p>
 
 <table>
   <thead>
     <tr>
+      <th>Round</th>
       <th>Higher Seed</th>
       <th>Lower Seed</th>
       <th>Score</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @series.each do |series| %>
     <tr>
+      <td><%= series.round.fancy_name %>
       <td><%= image_tag series.team1.logo_src, alt: series.team1.short_name, title: series.team1.name %></td>
       <td><%= image_tag series.team2.logo_src, alt: series.team2.short_name, title: series.team2.name %></td>
       <td><%= series.summary %></td>
