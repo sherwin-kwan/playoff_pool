@@ -28,11 +28,11 @@ class Prediction < ApplicationRecord
     0
   end
 
-  def active?
-    return false unless self.series.active?
-    newer_predictions = Prediction.where(series_id: self.series_id).where(user_id: self.user_id).where("created_at > ?", self.created_at)
-    return newer_predictions.size > 0 ? false : true
-  end
+  # def active?
+  #   return false unless self.series.active?
+  #   newer_predictions = Prediction.where(series_id: self.series_id).where(user_id: self.user_id).where("created_at > ?", self.created_at)
+  #   return newer_predictions.size > 0 ? false : true
+  # end
 
   def summary
     "#{self.winner.short_name} in #{self.games}"

@@ -13,6 +13,8 @@ class PredictionsController < ApplicationController
 
   # Note: Data is submitted through HTTP for this method
   def create
+    first_prediction = Prediction.where(user_id: self.current_user).where(series_id: params[:id]).first
+    update(first_prediction) and return if first_prediction
     @prediction = Series.find(params[:id]).predictions.new(predictions_params)
     @prediction.user = self.current_user
     if @prediction.save
@@ -33,8 +35,14 @@ class PredictionsController < ApplicationController
 
   def edit; end
 
-  def update
-    render plain: "Updating is not allowed, just create a new one"
+  def update(prediction)
+    if prediction.update(predictions_params)
+      redirect_to new_prediction_path(id: prediction.series_id), flash: { winner_id: prediction.winner_id, games: prediction.games,
+        errors: ["Your pick of #{prediction.winner.short_name} in #{prediction.games} has been submitted. Thank you!"]}
+    else
+      redirect_to new_prediction_path(id: prediction.series_id), flash: { winner_id: prediction.winner_id, games: prediction.games,
+                           errors: prediction.errors.full_messages }
+    end
   end
 
   def index
