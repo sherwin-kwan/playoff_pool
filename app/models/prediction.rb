@@ -32,6 +32,12 @@ class Prediction < ApplicationRecord
     "#{self.winner.short_name} in #{self.games}"
   end
 
+  def active?
+    return false unless self.series.active?
+    newer_predictions = Prediction.where(series_id: self.series_id).where(user_id: self.user_id).where("created_at > ?", self.created_at)
+    return newer_predictions.size > 0 ? false : true
+  end
+
   private
   def predict_before_series 
     if self.series.start_time && self.series.start_time < Time.now
