@@ -24,7 +24,7 @@ class Series < ApplicationRecord
   end
 
   def active_predictions
-    self.predictions.filter(&:active?).sort_by(&:score).reverse
+    self.predictions.sort_by(&:score).reverse
   end
 
   # Helper to make the dropdown select easier

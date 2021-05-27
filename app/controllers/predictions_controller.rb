@@ -46,7 +46,7 @@ class PredictionsController < ApplicationController
   end
 
   def index
-    @predictions = Prediction.all.filter(&:active?)
+    @predictions = Prediction.all
     @series = Series.all
   end
 
