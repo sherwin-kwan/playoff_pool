@@ -3,7 +3,7 @@ class SeriesController < ApplicationController
   before_action :check_privileges, only: [:edit, :new]
 
   def index
-    @series = Series.all.includes(:team1).includes(:team2).includes(:round).includes(:winner).filter(&:active?)
+    @series = Series.all.includes(:team1).includes(:team2).includes(:round).includes(:winner).filter(&:active?).sort_by(&:round_id)
   end
 
   def new
