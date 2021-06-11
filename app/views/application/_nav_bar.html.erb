@@ -1,7 +1,7 @@
 <nav class="top-nav">
   <%= link_to 'Home/Scores', root_path %>
   <%= link_to 'Make Picks', series_index_path %>
-  <%= link_to "This Round's Standings", round_path(id: 1) %>
+  <%= link_to "This Round's Standings", round_path(id: current_round) %>
   <%= link_to 'Rules', rules_path %>
   <% if session[:current_user] %>
     <%= link_to 'My Profile', user_path(id: session[:current_user]) %>
