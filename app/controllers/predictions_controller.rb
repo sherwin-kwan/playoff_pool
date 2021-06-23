@@ -9,6 +9,7 @@ class PredictionsController < ApplicationController
     @prediction = Series.find(params[:id]).predictions.new
     @team1 = @prediction.series.team1
     @team2 = @prediction.series.team2
+    @round_id = @prediction.series.round_id
   end
 
   # Note: Data is submitted through HTTP for this method
@@ -54,14 +55,6 @@ class PredictionsController < ApplicationController
 
   def predictions_params
     params.require(:prediction).permit(:winner_id, :games)
-  end
-
-  def validate_user
-    unless session[:current_user]
-      session[:target_page] = request.url
-      puts "Target is " + session[:target_page]
-      redirect_to :login 
-    end
   end
 
 end

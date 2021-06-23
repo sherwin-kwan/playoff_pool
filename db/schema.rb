@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_070155) do
+ActiveRecord::Schema.define(version: 2021_06_23_051750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_05_15_070155) do
     t.text "note"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
   create_table "predictions", force: :cascade do |t|
     t.bigint "winner_id"
     t.integer "games"
@@ -34,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_05_15_070155) do
     t.bigint "series_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "conn_smythe"
     t.index ["series_id"], name: "index_predictions_on_series_id"
     t.index ["user_id"], name: "index_predictions_on_user_id"
     t.index ["winner_id"], name: "index_predictions_on_winner_id"
@@ -84,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_05_15_070155) do
     t.bigint "division_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "nhl_api_id"
     t.index ["division_id"], name: "index_teams_on_division_id"
   end
 

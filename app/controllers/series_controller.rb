@@ -47,8 +47,10 @@ class SeriesController < ApplicationController
   end
 
   def check_privileges
-    unless User.find(session[:current_user]).admin?
-      render "application/error", {locals: {message: "You do not have permission to view this page"}} and return
+    if validate_user
+      render "application/error", {locals: {message: "You do not have permission to view this page"}} and return unless User.find(session[:current_user]).admin?
+    else
+      return # let page redirect to login
     end
   end
 end

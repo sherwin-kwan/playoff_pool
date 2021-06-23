@@ -12,9 +12,17 @@
     <%= collection_select(:prediction, :winner_id, @prediction.series.teams, :id, :name) %>
   </div>
   <div class="form-group">
-    <%= form.label :winner, "# of Games" %>
+    <%= form.label :games, "# of Games" %>
     <%= form.select :games, [4, 5, 6, 7] %>
   </div>
+  <% if @round_id == 4 %>
+    <div class="form-group">
+      <%= form.label :conn_smythe, "Conn Smythe Winner" %>
+      <%= form.text_field :conn_smythe %>
+    </div>
+    <h3>Warning: Your pick is final! You cannot change it after you click the Make Prediction button</h3>
+    <p>If a bug causes you to accidentally submit a pick, message Sherwin to get it fixed from the database ASAP.</p>
+  <% end %>
   <% if flash[:errors] %>
     <ul class="error">
       <% flash[:errors].each do |message| %>

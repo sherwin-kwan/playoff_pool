@@ -4,6 +4,8 @@ class Prediction < ApplicationRecord
   belongs_to :winner, class_name: "Team"
 
   validate :predict_before_series
+  validates :conn_smythe, presence: true, :if => Proc.new{|p| p.series.round_id == 4}
+  validates :conn_smythe, presence: false, :if => Proc.new{|p| p.series.round_id != 4}
 
   def correct_winner?
     self.winner_id == self.series.winner_id

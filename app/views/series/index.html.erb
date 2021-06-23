@@ -26,6 +26,8 @@
       <td>
         <% if series.start_time && series.start_time < Time.now %>
           Picks cannot be made after the series starts.
+        <% elsif series.round.id == 4 && series.user_has_prediction?(session[:current_user]) %>
+          You cannot change a Finals pick after you've submitted it.
         <% else %>
           <%= link_to session[:current_user] && series.user_has_prediction?(session[:current_user]) ? "Change your Pick!" : "Make your Pick!", new_prediction_path(id: series.id) %>
         <% end %>

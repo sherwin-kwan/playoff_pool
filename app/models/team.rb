@@ -25,9 +25,7 @@ class Team < ApplicationRecord
 
   def nhl_api_team
     # Needs refactor: the singleton methods on NHL::Team don't play well with Marshal
-    # Rails.cache.fetch(short_name, :expires => 7.days) do 
     NHL::Team.find_short_name(short_name)
-    # end
   end
 
   def nhl_id
