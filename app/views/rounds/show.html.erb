@@ -27,8 +27,8 @@
       <% @users_with_picks.each do |user| %>
       <% prediction = @predictions.filter{|pred| pred.series_id == ser.id && pred.user_id == user.id}.first
         if ser.winner_id 
-          if prediction.winner_id = ser.winner_id
-            success_class = prediction.games == ser.games ? "right-games" : "right-prediction"
+          if prediction&.winner_id == ser.winner_id
+            success_class = prediction&.games == ser.games ? "right-games" : "right-prediction"
           else
             success_class = "wrong-prediction"
           end
