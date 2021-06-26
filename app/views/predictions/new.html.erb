@@ -15,10 +15,10 @@
     <%= form.label :games, "# of Games" %>
     <%= form.select :games, [4, 5, 6, 7] %>
   </div>
+  <!-- For finals -->
   <% if @round_id == 4 %>
     <div class="form-group">
-      <%= form.label :conn_smythe, "Conn Smythe Winner" %>
-      <%= form.text_field :conn_smythe %>
+      <%= collection_select(:prediction, :conn_smythe_id, @players, :id, :name) %>
     </div>
     <h3>Warning: Your pick is final! You cannot change it after you click the Make Prediction button</h3>
     <p>If a bug causes you to accidentally submit a pick, message Sherwin to get it fixed from the database ASAP.</p>

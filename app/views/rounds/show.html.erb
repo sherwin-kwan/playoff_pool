@@ -26,15 +26,14 @@
       </td>
       <% @users_with_picks.each do |user| %>
       <% prediction = @predictions.filter{|pred| pred.series_id == ser.id && pred.user_id == user.id}.first
-        success_class = ser.winner_id && case prediction.score
-        when 0
-          "wrong-prediction"
-        when 1
-          "right-prediction"
-        when 2
-          "right-games"
+        if ser.winner_id 
+          if prediction.winner_id = ser.winner_id
+            success_class = prediction.games == series.games ? "right-games" : "right-prediction"
+          else
+            success_class = "wrong-prediction"
+          end
         else
-          ""
+          success_class = ""
         end
       %>
       <td class="<%= success_class %>">
