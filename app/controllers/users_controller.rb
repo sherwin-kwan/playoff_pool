@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @series = Series.where(year: Time.now.year)
+    @series = Series.where(year: @current_year)
   end
 
   private

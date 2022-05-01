@@ -17,7 +17,7 @@ class Team < ApplicationRecord
   end
 
   def playoff_schedule
-    @schedule = NHL::Game.playoff_schedule(Time.now.year, self.nhl_id)
+    @schedule = NHL::Game.playoff_schedule(@current_year, self.nhl_id)
     @schedule.map do |game|
       Game.new(game, self)
     end

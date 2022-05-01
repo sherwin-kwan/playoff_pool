@@ -13,10 +13,10 @@ class ImportTeamsAndPlayers < ActiveRecord::Migration[6.0]
       end
     end
 
-    # current_year_final = Series.where(year: Time.now.year).where(round_id: 4).first
-    # if current_year_final 
-    #   team1_players = NHL::Team.find(current_year_final.team1.nhl_api_id).roster
-    #   team2_players = NHL::Team.find(current_year_final.team2.nhl_api_id).roster
+    # @current_year_final = Series.where(year: @current_year).where(round_id: 4).first
+    # if @current_year_final 
+    #   team1_players = NHL::Team.find(@current_year_final.team1.nhl_api_id).roster
+    #   team2_players = NHL::Team.find(@current_year_final.team2.nhl_api_id).roster
 
   end
 

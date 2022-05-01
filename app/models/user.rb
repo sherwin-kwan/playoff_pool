@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   enum privilege: [:regular, :admin]
 
+  def self.current_year
+    ENV["CURRENT_YEAR"].to_i || 2021
+  end
+
   # Authentication related
 
   def lowercase_email
@@ -30,7 +34,7 @@ class User < ApplicationRecord
     self.results.find_by(year: year)
   end
 
-  def score(year = Time.now.year)
+  def score(year = self.class.current_year)
     if year >= 2021
       self.predictions.map(&:score).reduce(0, :+)
     else
@@ -38,7 +42,7 @@ class User < ApplicationRecord
     end
   end
 
-  def correct_predictions(year = Time.now.year)
+  def correct_predictions(year = self.class.current_year)
     if year >= 2021
       self.predictions.filter(&:correct_winner?).count
     else
@@ -46,7 +50,7 @@ class User < ApplicationRecord
     end
   end
 
-  def correct_lower_seed_picks(year = Time.now.year)
+  def correct_lower_seed_picks(year = self.class.current_year)
     if year >= 2021
       self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
     else
@@ -63,7 +67,7 @@ class User < ApplicationRecord
     end
   end
 
-  def rank(year = Time.now.year) 
+  def rank(year = self.class.current_year) 
       User.all.filter{|u| (u.score_with_tiebreaker(year) - self.score_with_tiebreaker(year)) > 0}.count + 1
     # Scoring.ranked_players(year).find_index{|user| user == self} + 1
   end
@@ -72,7 +76,7 @@ class User < ApplicationRecord
     self.predictions.find_by(series: series) ? true : false
   end
 
-  def has_picks?(year = Time.now.year)
+  def has_picks?(year = self.class.current_year)
     Series.where(year: year).filter{|ser| ser.user_has_prediction?(self.id)}.count > 0
   end
 
@@ -82,7 +86,7 @@ class User < ApplicationRecord
 
   def most_recent_active_year
     if self.has_picks?
-      Time.now.year
+      self.class.current_year
     else
       self.results.map(&:year).max
     end

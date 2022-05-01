@@ -1,14 +1,16 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_round, :validate_user
+  before_action :set_variables
 
-  def current_round
-    ENV["CURRENT_ROUND"] || 1
+  def set_variables
+    @current_round = ENV["CURRENT_ROUND"].to_i || 1
+    @current_year = ENV["CURRENT_YEAR"].to_i || 2021
   end
 
   def current_user
     User.find(session[:current_user])
   end
+
 
   def clear_errors
     flash[:errors] = nil
