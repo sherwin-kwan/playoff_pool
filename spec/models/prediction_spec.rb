@@ -1,42 +1,61 @@
-# spec/models/prediction_spec.rb
-
 require 'rails_helper'
 
-RSpec.describe Prediction, :type => :model do
-  fixtures :users
-  fixtures :teams 
-  fixtures :rounds
-  fixtures :series
-  fixtures :predictions
+RSpec.describe "scoring" do
 
-  it "awards no points if prediction is wrong" do
-    pred = predictions(:pred_joey_1)
-    expect(pred.score).to eq(0)
+  before(:each) do
+    @round = FactoryBot.create(:round)
+    @later_round = FactoryBot.create(:round, round: 3, base_score: 2)
+    @finals = FactoryBot.create(:round, round: 4, base_score: 2)
+    @team1 = FactoryBot.create(:team)    
+    @team2 = FactoryBot.create(:team, :hurricanes)
+    @mvp = FactoryBot.create(:player)
+    @series1 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @round, winner: @team1, games: 5)
+    @series2 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @later_round, winner: @team1, games: 7)
+    @series3 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @finals, winner: @team1, games: 5, conn_smythe: @mvp)
+    @user = FactoryBot.create(:user)
   end
 
-  it "awards 1 point for a correct prediction" do 
-    pred = predictions(:pred_billy_2)
+  it "should score a point per correct prediction" do
+    pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series1, games: 4)
     expect(pred.score).to eq(1)
   end
 
-  it "awards double points for a correct prediction with games" do
-    pred = predictions(:pred_joey_2)
+  it "should score 2 points for a correct prediction with games" do
+    pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series1, games: 5)
     expect(pred.score).to eq(2)
   end
 
-  it "handles later rounds correctly" do
-    pred = predictions(:pred_joey_13)
+  it "should score nothing for a wrong team prediction, even if games are right" do
+    pred = FactoryBot.create(:prediction, winner: @team2, user: @user, series: @series1, games: 5)
+    expect(pred.score).to eq(0)
+  end
+
+  it "should score 2 points for a correct round 3 prediction" do
+    pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series2, games: 4)
     expect(pred.score).to eq(2)
   end
 
-  it "handles double points bonus correctly in later rounds" do
-    pred = predictions(:pred_sher_14)
+  it "should score 4 points for a correct round 3 games prediction" do
+    pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series2, games: 7)
     expect(pred.score).to eq(4)
   end
 
-  it 'should classify old predictions as not active' do
-    pred = predictions(:pred_joey_9_original)
-    expect(pred.active?).to be(false)
+  it "can't create a round 4 prediction without CS pick" do    
+    pred = FactoryBot.build(:prediction, series: @series3, winner: @team1, games: 6)
+    expect(pred.save).to eq(false)
   end
+
+  it "should score 6 points for a correct round 4 games prediction with Conn Smythe" do
+   pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series3, games: 5, conn_smythe: @mvp)
+    expect(pred.score).to eq(6)
+  end
+
+  it 'should classify old predictions as not active' do
+    pred = FactoryBot.create(:prediction, winner: @team1, user: @user, series: @series1, games: 5)
+    pred2 = FactoryBot.create(:prediction, winner: @team2, user: @user, series: @series1, games: 5)
+    expect(pred.active?).to be(false)
+    expect(pred2.score).to eq(2)
+  end
+
 
 end

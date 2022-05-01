@@ -2,23 +2,22 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_053109) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_05_01_230002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "divisions", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -39,8 +38,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
     t.integer "games"
     t.bigint "user_id"
     t.bigint "series_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "conn_smythe_id"
     t.index ["series_id"], name: "index_predictions_on_series_id"
     t.index ["user_id"], name: "index_predictions_on_user_id"
@@ -54,8 +53,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
     t.integer "incorrect"
     t.integer "points"
     t.integer "lower_seed_correct"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "lower_seed_incorrect"
     t.index ["user_id"], name: "index_results_on_user_id"
   end
@@ -65,8 +64,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
     t.string "fancy_name"
     t.integer "special", default: 0
     t.integer "base_score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series", force: :cascade do |t|
@@ -75,11 +74,12 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
     t.bigint "winner_id"
     t.integer "games"
     t.bigint "round_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "year"
     t.integer "status", default: 0
-    t.datetime "start_time"
+    t.datetime "start_time", precision: nil
+    t.integer "conn_smythe_id"
     t.index ["round_id"], name: "index_series_on_round_id"
     t.index ["team1_id"], name: "index_series_on_team1_id"
     t.index ["team2_id"], name: "index_series_on_team2_id"
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
     t.string "name"
     t.string "short_name"
     t.bigint "division_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "nhl_api_id"
     t.index ["division_id"], name: "index_teams_on_division_id"
   end
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_053109) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "given_name"
     t.integer "privilege", default: 0

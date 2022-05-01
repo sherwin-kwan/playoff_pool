@@ -4,7 +4,7 @@ class CreateTeams < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :short_name
       t.references :division
-      t.timestamps
+    t.timestamps
     end
   end
 end

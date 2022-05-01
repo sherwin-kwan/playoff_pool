@@ -2,11 +2,11 @@ class Prediction < ApplicationRecord
   belongs_to :user
   belongs_to :series
   belongs_to :winner, class_name: "Team"
-  belongs_to :conn_smythe, class_name: "Player"
+  belongs_to :conn_smythe, class_name: "Player", required: false
 
   validate :predict_before_series
-  validates :conn_smythe_id, presence: true, :if => Proc.new{|p| p.series.round_id == 4}
-  validates :conn_smythe_id, presence: false, :if => Proc.new{|p| p.series.round_id != 4}
+  validates :conn_smythe_id, presence: true, :if => Proc.new{|p| p.series.round.round == 4}
+  validates :conn_smythe_id, presence: false, :if => Proc.new{|p| p.series.round.round != 4}
 
   def correct_winner?
     self.winner_id == self.series.winner_id
