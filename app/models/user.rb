@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Must be a valid email format" }
-  validates :password, length: { minimum: 5 }
   validates_confirmation_of :password
 
   enum privilege: [:regular, :admin]

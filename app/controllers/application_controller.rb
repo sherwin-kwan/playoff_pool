@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_round, :validate_user
 
   def current_round
-    3
+    ENV["CURRENT_ROUND"] || 1
   end
 
   def current_user
