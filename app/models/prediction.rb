@@ -5,6 +5,7 @@ class Prediction < ApplicationRecord
   belongs_to :conn_smythe, class_name: "Player", required: false
 
   validate :predict_before_series
+  validates :series, uniqueness: { scope: :user }
   validates :conn_smythe_id, presence: true, :if => Proc.new{|p| p.series.round.round == 4}
   validates :conn_smythe_id, presence: false, :if => Proc.new{|p| p.series.round.round != 4}
 
@@ -21,14 +22,15 @@ class Prediction < ApplicationRecord
   end
 
   def score # Does not yet account for MVP bonus
+    sc = 0
     if self.correct_winner?
       if self.correct_games?
-        return self.series.round.base_score * 2
+        sc = self.series.round.base_score * 2
       else
-        return self.series.round.base_score
+        sc = self.series.round.base_score
       end
     end
-    0
+    return self.conn_smythe && (self.conn_smythe == self.series.conn_smythe) ? sc + 2 : sc
   end
 
   def summary

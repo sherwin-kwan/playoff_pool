@@ -59,6 +59,7 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov', require: false
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'timecop'
   gem 'webdrivers'
 end
 
