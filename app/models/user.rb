@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   def score(year = self.class.current_year)
     if year >= 2021
-      self.predictions.map(&:score).reduce(0, :+)
+      self.predictions_for(year).map(&:score).reduce(0, :+)
     else
       self.old_result!(year)&.points
     end
@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   def correct_predictions(year = self.class.current_year)
     if year >= 2021
-      self.predictions.filter(&:correct_winner?).count
+      self.predictions_for(year).filter(&:correct_winner?).count
     else
       self.old_result!(year)&.correct 
     end
@@ -52,10 +52,14 @@ class User < ApplicationRecord
 
   def correct_lower_seed_picks(year = self.class.current_year)
     if year >= 2021
-      self.predictions.filter(&:correct_winner?).filter(&:lower_seed_pick?).count
+      self.predictions_for(year).filter(&:correct_winner?).filter(&:lower_seed_pick?).count
     else
       self.old_result!(year)&.lower_seed_correct
     end
+  end
+
+  def predictions_for(year)
+    self.predictions.joins(:series).where(series: {year: year})
   end
 
   def score_with_tiebreaker(year)
