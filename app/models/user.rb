@@ -73,7 +73,8 @@ class User < ApplicationRecord
   end
 
   def calculate_score(year = self.class.current_year) 
-    self.user_scores.create(year: year, score: self.score_with_tiebreaker(year))
+    score_for_this_year = self.user_scores.where(year: year).first_or_create
+    score_for_this_year.update(score: self.score_with_tiebreaker(year))
     self.save
   end
 
