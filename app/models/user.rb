@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   has_many :predictions
   has_many :results
+  has_many :user_scores
 
   before_create :lowercase_email
   before_validation :lowercase_email
@@ -71,9 +72,14 @@ class User < ApplicationRecord
     end
   end
 
-  def rank(year = self.class.current_year) 
-      User.all.filter{|u| (u.score_with_tiebreaker(year) - self.score_with_tiebreaker(year)) > 0}.count + 1
-    # Scoring.ranked_players(year).find_index{|user| user == self} + 1
+  def calculate_score(year = self.class.current_year) 
+    self.user_scores.create(year: year, score: self.score_with_tiebreaker(year))
+    self.save
+  end
+
+  def calculate_rank
+    User.all.filter{|u| (u.score_with_tiebreaker(year) - self.score_with_tiebreaker(year)) > 0}.count + 1
+    # self.rank = Scoring.ranked_players(year).find_index{|user| user == self} + 1
   end
 
   def has_prediction_for?(series)
@@ -94,6 +100,10 @@ class User < ApplicationRecord
     else
       self.results.map(&:year).max
     end
+  end
+
+  def self.with_picks(year = self.current_year)
+    User.joins(predictions: :series).where(series: {year: year}).uniq
   end
 
 end

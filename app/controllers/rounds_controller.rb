@@ -9,6 +9,9 @@ class RoundsController < ApplicationController
   end
 
   def users_with_picks
-    ActiveRecord::Base.connection.execute("SELECT DISTINCT users.id FROM users JOIN predictions ON users.id = predictions.user_id").to_a
+    ActiveRecord::Base.connection.execute("SELECT DISTINCT users.id FROM users 
+      JOIN predictions ON users.id = predictions.user_id
+      JOIN series ON predictions.series_id = series.id
+      WHERE series.year = #{@current_year.to_s}").to_a
   end
 end

@@ -9,6 +9,12 @@ class Series < ApplicationRecord
   validate :team_doesnt_play_itself
   enum status: %i[active trash] 
 
+  after_save :refresh_ranks
+
+  def refresh_ranks
+    User.with_picks.each{|u| u.get_rank}
+  end
+
   # Validation methods
   def team_doesnt_play_itself
     if self.team1 == self.team2
