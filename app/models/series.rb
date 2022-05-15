@@ -11,8 +11,8 @@ class Series < ApplicationRecord
 
   after_save :refresh_ranks
 
-  def refresh_ranks
-    User.with_picks.each{|u| u.get_rank}
+  def refresh_scores
+    User.with_picks.each{|u| u.calculate_score}
   end
 
   # Validation methods
