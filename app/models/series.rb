@@ -9,7 +9,7 @@ class Series < ApplicationRecord
   validate :team_doesnt_play_itself
   enum status: %i[active trash] 
 
-  after_save :refresh_ranks
+  after_save :refresh_scores
 
   def refresh_scores
     User.with_picks.each{|u| u.calculate_score}
