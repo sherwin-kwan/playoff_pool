@@ -44,3 +44,6 @@ yarn-debug.log*
 
 # Coverage files
 coverage/*
+
+# Database dumps
+*.dump

@@ -15,7 +15,7 @@
     <tr>
       <!--<td><%# user.rank(year) %></td>-->
       <td><%= link_to user.given_name.length > 0 ? user.given_name : user.name, user_path(id: user.id) %></td>
-      <td><%= user.score(year) %></td>
+      <td><%= user.user_scores.find_by(year: year).score.to_i %></td>
       <td><%= user.correct_predictions(year) %></td>
       <td><%= user.correct_lower_seed_picks(year) %></td>
     </tr>
