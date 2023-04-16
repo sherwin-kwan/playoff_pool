@@ -78,8 +78,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+
 production:
   <<: *default
-  database: playoff_pool_production
-  username: playoff_pool
-  password: <%= ENV['PLAYOFF_POOL_DATABASE_PASSWORD'] %>
+  host: containers-us-west-28.railway.app
+  database: railway
+  username: postgres
+  port: 6721
+  password: <%= ENV["PLAYOFF_POOL_DATABASE_PASSWORD"] %>
