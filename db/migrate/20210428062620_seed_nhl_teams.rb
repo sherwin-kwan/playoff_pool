@@ -36,6 +36,7 @@ class SeedNhlTeams < ActiveRecord::Migration[6.0]
     n.teams.create(name: "Toronto Maple Leafs", short_name: "Leafs")
     n.teams.create(name: "Vancouver Canucks", short_name: "Canucks")
     n.teams.create(name: "Winnipeg Jets", short_name: "Jets")
+    n.teams.create(name: "Seattle Kraken", short_name: "Kraken")
   end
 
   def down
