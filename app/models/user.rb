@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :user_scores
 
   before_create :lowercase_email
+  after_create :create_user_score_object
   before_validation :lowercase_email
   has_secure_password
 
@@ -15,7 +16,7 @@ class User < ApplicationRecord
   enum privilege: [:regular, :admin]
 
   def self.current_year
-    ENV["CURRENT_YEAR"].to_i || 2021
+    ENV["CURRENT_YEAR"].to_i || Time.now.year
   end
 
   # Authentication related
@@ -41,6 +42,10 @@ class User < ApplicationRecord
     else
       self.old_result!(year)&.points
     end
+  end
+
+  def create_user_score_object
+    UserScore.create(user_id: self.id, year: User.current_year)
   end
 
   def correct_predictions(year = self.class.current_year)

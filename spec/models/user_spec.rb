@@ -16,4 +16,8 @@ RSpec.describe User, :type => :model do
     expect(user.save).to be(false)
   end
 
+  it "creates with a user score object attached in the current year" do
+    
+  end
+
 end

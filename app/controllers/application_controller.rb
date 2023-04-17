@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def set_variables
     @current_round = ENV["CURRENT_ROUND"].to_i || 1
-    @current_year = ENV["CURRENT_YEAR"].to_i || 2021
+    @current_year = ENV["CURRENT_YEAR"].to_i || Time.now.year
   end
 
   def current_user

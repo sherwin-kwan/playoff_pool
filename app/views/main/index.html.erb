@@ -3,7 +3,7 @@
   {{message}}
   <app></app>
 </div> -->
-<h1>Stanley Cup Playoff Pool <%= ENV["CURRENT_YEAR"] %></h1>
+<h1>Stanley Cup Playoff Pool <%= @current_year %></h1>
 
 <%= render 'scoreboard', year: @current_year, users: @users %>
 

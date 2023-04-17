@@ -1,0 +1,1 @@
+User.all.each{UserScore.where(year: ENV["CURRENT_YEAR"] || Time.now.year, user_id: _1.id).first_or_create}
