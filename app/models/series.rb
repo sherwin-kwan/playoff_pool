@@ -50,6 +50,7 @@ class Series < ApplicationRecord
   end
 
   def user_has_prediction?(user_id)
+    return false unless user_id
     User.find(user_id).has_prediction_for?(self)
   end
 

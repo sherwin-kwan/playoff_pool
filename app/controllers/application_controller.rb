@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find(session[:current_user])
+    return session[:current_user] ? User.find(session[:current_user]) : nil
   end
 
 
