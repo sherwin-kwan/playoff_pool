@@ -1,2 +1,2 @@
-web: RAILS_ENV=production bin/rails server -p 3000 -b 0.0.0.0
+web: RAILS_ENV=production bin/rails server -p $PORT -b 0.0.0.0
 css: bin/rails dartsass:watch
