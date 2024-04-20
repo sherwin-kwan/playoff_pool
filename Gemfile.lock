@@ -1,9 +1,3 @@
-PATH
-  remote: ../nhl-ruby
-  specs:
-    nhl (1.1.0)
-      faraday
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -382,7 +376,6 @@ DEPENDENCIES
   libv8-node
   listen (~> 3.2)
   mini_racer
-  nhl!
   pg (>= 0.18, < 2.0)
   pry
   pry-rails
