@@ -47,6 +47,10 @@
   </div>
 </main>
 <ul>
-<li><%= link_to "Destroy", series_path(@this_series),
+
+<% if @current_user&.privilege == "admin" %>
+  <li><%= link_to "Destroy", series_path(@this_series),
     method: :delete,
-    data: { confirm: "Are you sure?" } %></li></ul>
+    data: { confirm: "Are you sure?" } %></li>
+<% end %>
+</ul>

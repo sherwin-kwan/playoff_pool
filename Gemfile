@@ -26,7 +26,7 @@ gem 'libv8-node'
 
 gem "faraday"
 
-# gem 'nhl', git: 'https://github.com/sherwin-kwan/nhl-ruby.git'
+gem 'nhl', git: 'https://github.com/sherwin-kwan/nhl-ruby.git'
 
 # Use this when doing local testing with the NHL gem fork
 # gem 'nhl', path: '../nhl-ruby'

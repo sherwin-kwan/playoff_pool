@@ -21,6 +21,7 @@ class SeriesController < ApplicationController
 
   def show
     @this_series = Series.find(params[:id])
+    @current_user = current_user
   end
 
   def edit

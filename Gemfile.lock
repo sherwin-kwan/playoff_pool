@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/sherwin-kwan/nhl-ruby.git
+  revision: e598a7a4040834d42db9924a742b22cd3af29f89
+  specs:
+    nhl (1.1.0)
+      faraday
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -376,6 +383,7 @@ DEPENDENCIES
   libv8-node
   listen (~> 3.2)
   mini_racer
+  nhl!
   pg (>= 0.18, < 2.0)
   pry
   pry-rails

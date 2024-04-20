@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     return session[:current_user] ? User.find(session[:current_user]) : nil
   end
 
-
   def clear_errors
     flash[:errors] = nil
   end
