@@ -29,14 +29,16 @@ class Team < ApplicationRecord
   end
 
   def nhl_id
-    nhl_api_team.id
+    # nhl_api_team.id
   end
 
   def venue_name
-    nhl_api_team.venue_name
+    "Unknown Arena"
+    # nhl_api_team.venue_name
   end
 
   def logo_src
-    nhl_api_team.image
+    "nothing"
+    # nhl_api_team.image
   end
 end

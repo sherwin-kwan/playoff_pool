@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.1'
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0'
@@ -20,13 +20,16 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'sprockets-rails'
+gem 'sassc-rails'
 
 gem 'libv8-node'
 
-gem 'nhl', git: 'https://github.com/sherwin-kwan/nhl-ruby.git'
+gem "faraday"
+
+# gem 'nhl', git: 'https://github.com/sherwin-kwan/nhl-ruby.git'
 
 # Use this when doing local testing with the NHL gem fork
-# gem 'nhl', path: '../gems/nhl-ruby'
+gem 'nhl', path: '../nhl-ruby'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

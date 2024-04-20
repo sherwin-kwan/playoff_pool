@@ -18,8 +18,8 @@
     <% @series.each do |series| %>
     <tr>
       <td><%= series.round.fancy_name %>
-      <td><%= image_tag series.team1.logo_src, alt: series.team1.short_name, title: series.team1.name %></td>
-      <td><%= image_tag series.team2.logo_src, alt: series.team2.short_name, title: series.team2.name %></td>
+      <td><%= series.team1.short_name %></td>
+      <td><%= series.team2.short_name %></td>
       <td><%= series.summary %></td>
       <td><%= series.start_time_formatted %></td>
       <td><%= link_to "Details", series_path(id: series.id) %></td>
