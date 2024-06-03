@@ -36,9 +36,4 @@ class Team < ApplicationRecord
     "Unknown Arena"
     # nhl_api_team.venue_name
   end
-
-  def logo_src
-    "nothing"
-    # nhl_api_team.image
-  end
 end

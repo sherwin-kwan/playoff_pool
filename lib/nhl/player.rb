@@ -7,7 +7,7 @@ require 'nhl/helpers'
 module NHL
   class Player
 
-    KEY = "people"
+    KEY = "v1/player"
     URL = BASE + KEY
 
     # A list of attributes to include in the Player object.
@@ -54,7 +54,7 @@ module NHL
       
       # Returns a player object from an ID.
       def player_by_id(id)
-        response = Faraday.get("#{URL}/#{id}")
+        response = Faraday.get("#{URL}/#{id}/landing")
         data = JSON.parse(response.body)
         new(data[KEY][0]) if data[KEY]
       end
