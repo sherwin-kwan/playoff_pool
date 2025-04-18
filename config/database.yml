@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: playoff_pool_development
+  database: 2024_playoff_pool
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
