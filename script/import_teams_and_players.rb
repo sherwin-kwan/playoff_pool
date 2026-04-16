@@ -1,7 +1,7 @@
 require "faraday"
 require "pry"
 
-TEAM_API_URL = "https://api-web.nhle.com/v1/standings/2024-04-18"
+TEAM_API_URL = "https://api-web.nhle.com/v1/standings/2025-04-17"
 
 team_name_differences = {
     "Knights" => "Golden Knights",
@@ -19,7 +19,7 @@ Team.all.each do |team|
     team.logo_src = nhl_api_team["teamLogo"]
     team.abbrev = nhl_api_team["teamAbbrev"]["default"]
     team.save
-    player_api_url = "https://api-web.nhle.com/v1/roster/#{team.abbrev}/20232024"
+    player_api_url = "https://api-web.nhle.com/v1/roster/#{team.abbrev}/20242025"
     res2 = Faraday.get(player_api_url)
     nhl_formatted_roster = JSON.parse(res2.body) # Hash with 3 keys "forwards", "defencemen", and "goalies"
     roster = nhl_formatted_roster.values.flatten

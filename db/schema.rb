@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_03_051509) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_16_000000) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "divisions", force: :cascade do |t|
@@ -114,6 +115,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_03_051509) do
     t.string "given_name"
     t.integer "privilege", default: 0
     t.text "about_text"
+    t.string "provider"
+    t.string "uid"
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
 end

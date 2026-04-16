@@ -16,11 +16,9 @@ RSpec.describe "scoring", :type => :request do
     @request.session[:current_user] = @user
   end
 
-  xit "can create a prediction" do
+  it "can create a prediction" do
     post "/series/#{@series1.id}/create_prediction", params: {}
     expect(response.status).to eq(200)
   end
-
-
 
 end
