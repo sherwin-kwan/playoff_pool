@@ -1,9 +1,9 @@
 class SeriesController < ApplicationController
 
-  before_action :check_privileges, only: [:edit, :new]
+  before_action :check_privileges, only: [:edit, :new, :create, :update, :destroy]
 
   def index
-    @series = Series.all.includes(:team1).includes(:team2).includes(:round).includes(:winner).where(year: @current_year).filter(&:active?).sort_by("start_time ASC")
+    @series = Series.all.includes(:team1).includes(:team2).includes(:round).includes(:winner).where(year: @current_year).filter(&:active?).sort_by{|s| s.start_time}
   end
 
   def new
