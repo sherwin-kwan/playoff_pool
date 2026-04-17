@@ -13,6 +13,6 @@ years_to_run_script_on.each do |year|
     lower_seed_correct = correct.joins(:series).where("predictions.winner_id = series.team2_id").count
     lower_seed_incorrect = lower_seed_total - lower_seed_correct
     points = User.find(user_id).score(year)
-    Result.create(user_id: user_id, year: year, correct: correct_count, incorrect: incorrect_count, lower_seed_correct: lower_seed_correct, lower_seed_incorrect: lower_seed_incorrect, points: points)
+    Result.where(user_id: user_id, year: year, correct: correct_count, incorrect: incorrect_count, lower_seed_correct: lower_seed_correct, lower_seed_incorrect: lower_seed_incorrect, points: points).first_or_create
   end
 end

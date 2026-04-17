@@ -35,5 +35,55 @@ RSpec.describe User, :type => :model do
     expect(user.provider).to eq 'google_oauth2'
     expect(user.password_digest).to be_nil
   end
-  
+
+  describe '#rank' do
+    before do
+      @user = create(:user)
+      @user2 = create(:user)
+      @year = 2024
+    end
+
+    it 'is 1 when the user has the highest score in that year' do
+      @user.results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3)
+      @user2.results.create(year: @year, points: 15, correct: 8, lower_seed_correct: 2)
+
+      expect(@user.rank(@year)).to eq(1)
+    end
+
+    it 'is 1 when the user has the joint highest score in that year with better tiebreakers' do
+      @user.results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3)
+      @user2.results.create(year: @year, points: 15, correct: 10, lower_seed_correct: 2)
+
+      expect(@user.rank(@year)).to eq(1)
+    end
+
+    it 'is 1 when the user has the joint highest score in that year with better tiebreakers (2)' do
+      @user.results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3)
+      @user2.results.create(year: @year, points: 15, correct: 9, lower_seed_correct: 4)
+
+      expect(@user.rank(@year)).to eq(1)
+    end
+
+    it 'is 2 when the user has the joint highest score in that year with worse tiebreakers' do
+      @user.results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3)
+      @user2.results.create(year: @year, points: 20, correct: 11, lower_seed_correct: 2)
+
+      expect(@user.rank(@year)).to eq(2)
+    end
+
+    it 'is not affected by results from other years' do
+      @user.results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3)
+      @user2.results.create(year: 2023, points: 99, correct: 15, lower_seed_correct: 8)
+
+      expect(@user.rank(@year)).to eq(1)
+    end
+
+    it 'is 4 when 3 other users have higher scores in that year' do
+      @user.results.create(year: @year, points: 10, correct: 5, lower_seed_correct: 1)
+      3.times { create(:user).results.create(year: @year, points: 20, correct: 10, lower_seed_correct: 3) }
+
+      expect(@user.rank(@year)).to eq(4)
+    end
+  end
+
 end

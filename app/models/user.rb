@@ -106,6 +106,11 @@ class User < ApplicationRecord
     # self.rank = Scoring.ranked_players(year).find_index{|user| user == self} + 1
   end
 
+  def rank(year)
+    users_result = Result.find_by(year: year, user_id: self.id)
+    Result.where(year: year).filter{|r| r.points_with_tiebreaker > users_result.points_with_tiebreaker}.count + 1
+  end
+
   def has_prediction_for?(series)
     self.predictions.find_by(series: series) ? true : false
   end
