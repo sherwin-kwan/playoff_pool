@@ -26,11 +26,12 @@ class SessionsController < ApplicationController
     session[:target_page] = nil
     redirect_to target || root_path
   rescue => e
-    redirect_to :login, flash: { error: "Google sign-in failed: #{e.message}" }
+    redirect_to :login, flash: "Sorry, an error occurred during Google sign-in"
+    Rails.logger.error "Google sign-in failed: #{e.message}"
   end
 
   def oauth_failure
-    redirect_to :login, flash: { error: params[:message] }
+    redirect_to :login, flash: "Sorry, an error occurred during Google sign-in"
   end
 
   def new; end
