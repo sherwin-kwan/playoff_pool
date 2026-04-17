@@ -12,6 +12,10 @@ class SeriesController < ApplicationController
 
   def create
     @this_series = Series.new(series_params)
+    if @this_series.start_time < Time.now
+      redirect_to new_series_path, flash: {errors: ["Series start time cannot be in the past"]}
+      return
+    end
     if @this_series.save 
       redirect_to series_index_path
     else
