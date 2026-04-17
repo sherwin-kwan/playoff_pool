@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
   validates :password, presence: true, length: { minimum: 6 }, on: :create, if: -> { provider.blank? }
 
-  enum privilege: [:regular, :admin]
+  enum :privilege, [:regular, :admin]
 
   def self.current_year
     ENV["CURRENT_YEAR"].to_i || Time.now.year

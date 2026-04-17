@@ -7,7 +7,7 @@ class Series < ApplicationRecord
   belongs_to :winner, class_name: "Team", required: false
 
   validate :team_doesnt_play_itself
-  enum status: %i[active trash] 
+  enum :status, %i[active trash] 
 
   after_save :refresh_scores
 
