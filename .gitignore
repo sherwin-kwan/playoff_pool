@@ -53,3 +53,6 @@ coverage/*
 
 # VSCode
 *.code-workspace
+
+# Files which were modified to include private information
+seed_old_results.rake

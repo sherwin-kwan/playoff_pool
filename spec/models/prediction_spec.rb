@@ -2,17 +2,18 @@ require 'rails_helper'
 
 RSpec.describe "scoring" do
 
-  before(:each) do
+  before do
     @round = FactoryBot.create(:round)
     @later_round = FactoryBot.create(:round, round: 3, base_score: 2)
     @finals = FactoryBot.create(:round, round: 4, base_score: 2)
     @team1 = FactoryBot.create(:team)    
     @team2 = FactoryBot.create(:team, :hurricanes)
     @mvp = FactoryBot.create(:player)
-    @series1 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @round, winner: @team1, games: 5)
+    @series1 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @round, winner: @team1, games: 5, start_time: "2025-05-01T00:00:00Z")
     @series2 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @later_round, winner: @team1, games: 7)
     @series3 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @finals, winner: @team1, games: 5, conn_smythe: @mvp)
     @user = FactoryBot.create(:user)
+    Timecop.freeze("2025-04-30T00:00:00Z")
   end
 
   context "scoring" do
@@ -67,8 +68,16 @@ RSpec.describe "scoring" do
 
   context "prediction times" do
     it 'cannot make a prediction once the start time is over' do
-
+      Timecop.freeze(@series1.start_time + 1.minute)
+      pred = FactoryBot.build(:prediction, winner: @team1, user: @user, series: @series1, games: 5)
+      expect(pred.save).to be(false)
+      expect(pred.errors.full_messages).to include(/Cannot make a prediction/)
+      Timecop.return
     end
+  end
+
+  after do
+    Timecop.return
   end
 
 end

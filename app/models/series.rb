@@ -55,7 +55,7 @@ class Series < ApplicationRecord
   end
 
   def start_time_formatted
-    time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"]) 
+    time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"] || "UTC") 
     return self.start_time ? (time_zone ? self.start_time.in_time_zone(time_zone).strftime("%F at %H:%M") : self.start_time.strftime("%F at %H:%M")) : "Not available"
   end
 

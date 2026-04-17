@@ -5,7 +5,7 @@ class Game
    :time_zone
 
   def initialize(game, team = nil)
-    @time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"]) 
+    @time_zone = ActiveSupport::TimeZone.new(ENV["TIME_ZONE"] || "UTC") 
     @time_raw = game.time.in_time_zone(@time_zone)
     @time = @time_raw.strftime("%H:%M")
     @date = @time_raw.strftime("%F")
