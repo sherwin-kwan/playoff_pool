@@ -5,19 +5,27 @@ class UsersController < ApplicationController
   end
 
   def create
-
-    @user = User.new(user_params)
-
-    # If the db query fails, ActiveRecord does not throw an error, but instead the "save" method returns false.
-    # So, put a condition to handle the error.
-    if @user.save
-      session[:current_user] = @user.id
-      target = session[:target_page]
-      session[:target_page] = nil
-      redirect_to target || root_path
+    existing = User.find_by(email: user_params[:email]&.strip&.downcase)
+    if existing&.provider.present?
+      if existing.update(user_params.except(:email))
+        session[:current_user] = existing.id
+        target = session[:target_page]
+        session[:target_page] = nil
+        redirect_to target || root_path
+      else
+        redirect_to :new_user, flash: { errors: existing.errors.full_messages }
+      end
     else
-      redirect_to :new_user, flash: { original_name: @user.name, original_given_name: @user.given_name, original_email: @user.email,
-                           errors: @user.errors.full_messages }
+      @user = User.new(user_params)
+      if @user.save
+        session[:current_user] = @user.id
+        target = session[:target_page]
+        session[:target_page] = nil
+        redirect_to target || root_path
+      else
+        redirect_to :new_user, flash: { original_name: @user.name, original_given_name: @user.given_name, original_email: @user.email,
+                             errors: @user.errors.full_messages }
+      end
     end
   end
 

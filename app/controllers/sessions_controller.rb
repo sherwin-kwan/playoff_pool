@@ -19,5 +19,19 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
+  def google_callback
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    session[:current_user] = user.id
+    target = session[:target_page]
+    session[:target_page] = nil
+    redirect_to target || root_path
+  rescue => e
+    redirect_to :login, flash: { error: "Google sign-in failed: #{e.message}" }
+  end
+
+  def oauth_failure
+    redirect_to :login, flash: { error: params[:message] }
+  end
+
   def new; end
 end

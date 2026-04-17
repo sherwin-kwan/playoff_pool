@@ -7,11 +7,12 @@ class User < ApplicationRecord
   before_create :lowercase_email
   after_create :create_user_score_object
   before_validation :lowercase_email
-  has_secure_password
+  has_secure_password(validations: false)
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Must be a valid email format" }
   validates_confirmation_of :password
+  validates :password, presence: true, length: { minimum: 6 }, on: :create, if: -> { provider.blank? }
 
   enum privilege: [:regular, :admin]
 
@@ -23,6 +24,23 @@ class User < ApplicationRecord
 
   def lowercase_email
     self.email = self.email.strip.downcase if self.email
+  end
+
+  def self.from_omniauth(auth)
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    user ||= find_by(email: auth.info.email.downcase)
+    if user
+      user.update(provider: auth.provider, uid: auth.uid)
+    else
+      user = create!(
+        provider:   auth.provider,
+        uid:        auth.uid,
+        email:      auth.info.email.downcase,
+        name:       auth.info.name,
+        given_name: auth.info.first_name
+      )
+    end
+    user
   end
 
   def self.authenticate_with_email(email, password)

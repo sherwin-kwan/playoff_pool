@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get "/login" => "sessions#new", as: :login
   post "/login" => "sessions#create", as: :login_submit
   get "/logout" => "sessions#destroy", as: :logout
+  # Callback (redirect after successful auth) - this must match the Google Cloud Console redirect URL
+  # This is the default path set in the omniauth gem
+  get '/auth/google_oauth2/callback', to: 'sessions#google_callback'
+  get '/auth/failure',                to: 'sessions#oauth_failure'
 
   # Predictions 
   

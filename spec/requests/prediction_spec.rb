@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'request_helpers'
 
 RSpec.describe "scoring", :type => :request do
+  include RequestHelpers
 
   before(:each) do
     @round = FactoryBot.create(:round)
@@ -13,7 +15,7 @@ RSpec.describe "scoring", :type => :request do
     @series2 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @later_round, winner: @team1, games: 7, start_time: 1.day.from_now)
     @series3 = FactoryBot.create(:series, team1: @team1, team2: @team2, round: @finals, winner: @team1, games: 5, conn_smythe: @mvp, start_time: 1.day.from_now)
     @user = FactoryBot.create(:user)
-    @request.session[:current_user] = @user
+    login_as(@user)
   end
 
   it "can create a prediction" do
