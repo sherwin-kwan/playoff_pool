@@ -1,5 +1,4 @@
 require "faraday"
-require "pry"
 
 TEAM_API_URL = "https://api-web.nhle.com/v1/standings/2025-04-17"
 
